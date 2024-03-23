@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('access', {
+    sequelize.define('Access', {
       roleId:{ 
         type : DataTypes.INTEGER,
         allowNull: false,

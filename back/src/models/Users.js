@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('user', {
+    sequelize.define('User', {
       id: {
         type : DataTypes.INTEGER,
         primaryKey: true,
@@ -26,15 +26,19 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true
       },
-      status:{
+      active:{
         type : DataTypes.BOOLEAN,
-        defaultValue: false,
         allowNull: false,
       },
-      role:{
-        type : DataTypes.ENUM("superAdmin", "Admin", "Employer"),
-        allowNull: false,
-      },
+      // role:{
+      //   type : DataTypes.STRING,
+      //   allowNull: false,
+      //   references: {
+      //     model: "Role" , // Can be both a string representing the table name or a Sequelize model
+      //     key: "description"
+      //   }
+      // },
+      
   },{ timestamps: false });
 };
 
