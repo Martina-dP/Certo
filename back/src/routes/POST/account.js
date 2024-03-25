@@ -5,7 +5,7 @@ const { User } = require('../../db');
 
 router.post('/', (req, res) =>{
     // const { idUser,idClient } = req.body
-    const { id, name, lastName, user, password, status, role } = req.body;
+    const { id, name, lastName, user, password, active, role } = req.body;
    
     console.log("user", User)
     try {
@@ -15,7 +15,7 @@ router.post('/', (req, res) =>{
              lastName:lastName, 
              user:user, 
              password:password, 
-             status:status, 
+             active:active, 
              role:role
         }).then((user) => res.status(201).send(user))
 
