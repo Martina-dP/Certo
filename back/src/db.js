@@ -32,7 +32,7 @@ const { Role, User } = sequelize.models;
 
 // Aca vendrian las relaciones
 
-Role.hasMany(User, {foreignKey: {name: 'role', allowNull: false,}, sourceKey: 'roleId'});
+// Role.hasMany(User, {foreignKey: {name: 'role', allowNull: false,}, sourceKey: 'roleId'});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

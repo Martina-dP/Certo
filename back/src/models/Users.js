@@ -29,15 +29,12 @@ module.exports = (sequelize) => {
       active:{
         type : DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: true,
       },
-      // role:{
-      //   type : DataTypes.STRING,
-      //   allowNull: false,
-      //   references: {
-      //     model: "Role" , // Can be both a string representing the table name or a Sequelize model
-      //     key: "description"
-      //   }
-      // },
+      role:{
+        type : DataTypes.ENUM("superAdmin", "admin", "employer"),
+        allowNull: false,
+      },
       
   },{ timestamps: false });
 };

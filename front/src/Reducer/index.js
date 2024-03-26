@@ -1,8 +1,11 @@
-import { LOGIN, GET_ADMINS } from "../Action/index"
+import { LOGIN, GET_ADMINS, POST_USER } from "../Action/index"
 
 const initialState = {
     admin : {},
     allAdmins : {},
+    user: {},
+    allUsers : {},
+    newUser: {},
     loginUser: {},
  };
 
@@ -15,14 +18,22 @@ function rootReducer (state = initialState, { type, payload }) {
                 admin : payload,
                 allAdmins : payload
             };
+        case POST_USER :
+            return {
+                ...state,
+                newUser : payload,
+            };
         // OTROS
         case LOGIN :
-            const { mail, password } = payload;
+            const { user, password, token, id, validate } = payload;
             return {
                 ...state,
                 loginUser: {
-                    mail, 
-                    password
+                    user, 
+                    password,
+                    token,
+                    id,
+                    validate
                 },
             };
 

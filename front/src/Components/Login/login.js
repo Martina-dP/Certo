@@ -27,15 +27,15 @@ function Login() {
       .required("La contraseña es obligatoria")
     });
 
-  const handleSubmit = (values) => {
-      dispatch(login(values)).then((response) => {
+  const handleSubmit = (input) => {
+      dispatch(login(input)).then((response) => {
          console.log(response.payload, "response")    
          navigate("/main");      
       })
         .catch((error) => {
-          alert(error.response, "error")    
+          alert(error.response.data.msg, "error")    
+          console.log(error.response.data, "response")  
         });
-      console.log(values)
   };
 
   return(
