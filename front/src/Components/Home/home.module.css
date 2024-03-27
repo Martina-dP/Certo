@@ -1,0 +1,58 @@
+.subTotal {
+    height: 100vh;
+    background-image: url("../Media/logo.png");
+    background-repeat: no-repeat;
+    background-size: 30%;
+    background-position-x: right;
+    background-position-y: bottom;
+}
+
+.contenedor {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 16% 84%;
+}
+
+.c {
+    display: grid;
+    grid-template-rows: 25% 35%;
+    gap: 40%;
+}
+
+.parteUno {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.contenedor2 {
+    display: grid;
+    align-content: center;
+    padding-left: 2em;
+}
+
+.parteDos {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.bttn {
+    background-color: #4f5054;
+    color: white;
+    border: none;
+    width: 14em;
+    height: 4em;
+    letter-spacing: 0.2em;
+}
+
+.bttnL {
+    background-color: #4f5054;
+    color: white;
+    border: none;
+    width: 29em;
+    height: 4em;
+    letter-spacing: 0.2em;
+}
