@@ -1,0 +1,12 @@
+.general{
+    display: flex;
+    justify-content: center;
+    background-color: #04265c;
+    padding-top: 1.6em;
+    padding-bottom: 1.6em;
+}
+
+.img {
+    width: 10%;
+    opacity: 85%;
+}

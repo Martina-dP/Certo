@@ -1,0 +1,35 @@
+.total {
+    font-family: 'Quicksand';
+}
+
+.cabeza {
+    background-image:  url("../Media/back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 30em;
+    margin-bottom: 4em;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Quicksand';
+}
+
+.titulo {
+    font-size: 2.8em;
+    padding-bottom: .4em;
+    
+
+}
+
+.subTitulo {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2em;
+}
+
+.fuera {
+    width: 80%;
+    margin: auto;
+}

@@ -1,17 +1,32 @@
 import React from 'react'; 
-import { Link } from "react-router-dom";
+import style from "./landing.module.css";
+import Nav from './nav/nav';
+import About from './about/about';
+import Work from './work/work';
+import Vision from './vision/vision';
+import Footer from './footer/footer';
 
 export function Landing() {
 
     return(
-        <div>
-            <h1>Welcome</h1>
-            <Link to = "/logIn">
-              <button> Iniciar sesion </button>
-            </Link>
-            <Link to = "/newAcount">
-              <button> Crear cuenta</button>
-            </Link>
+        <div className = {style.total}>
+            <Nav />
+            <div className = {style.fuera}>
+              <div className = {style.cabeza}>
+                <span className = {style.titulo}>Estamos para ayudarte en tu administración</span>
+                <span className = {style.subTitulo}>Domina tu inventario, impulsa tus ventas: Tu aliado en la gestión empresarial.</span>
+              </div>
+              <div className = {style.conteiner2}>
+                <About />
+              </div>
+              <div className = {style.conteiner3}>
+                <Work />
+              </div>
+              <div className = {style.conteiner3}>
+                <Vision />
+              </div>
+            </div>
+            <Footer />
         </div>
     )
 };
