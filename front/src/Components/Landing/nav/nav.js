@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./nav.module.css"
+import { Link } from "react-router-dom"
 
 const Nav = () => {
 
@@ -19,9 +20,6 @@ const Nav = () => {
                         <span className={style.s}>Que hacemos</span>
                         <span className={style.s}>Nuestra vision</span>
                         <span className={style.s}>Contacto</span>
-                    </div>
-                    <div className={style.bttnPosition}>
-                        <button className={style.bttnInside}>Iniciar Sesion</button>
                     </div>
                 </div>
             </div>

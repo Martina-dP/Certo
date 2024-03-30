@@ -1,8 +1,9 @@
 .nav {
-    background-color: #04265c;
-    color: white;
+    background-color: white;
+    color: #4e6b74;
     padding: 1.6em;
     font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 0 1.5em 0 #4f5054;
 }
 
 .general {
@@ -19,16 +20,16 @@
 }
 
 .s {
-    color: rgba(255, 255, 255, 0.715);
+    color: #4e6b74;
     font-weight: bold;
 }
 
 .title {
-    font-size: 1.3em;
+    font-size: 1.4em;
 }
 
 .links {
-    width: 45%;
+    width: 60%;
     display: flex;
     justify-content: space-evenly;
 }

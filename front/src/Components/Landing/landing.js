@@ -5,6 +5,7 @@ import About from './about/about';
 import Work from './work/work';
 import Vision from './vision/vision';
 import Footer from './footer/footer';
+import { Link } from 'react-router-dom';
 
 export function Landing() {
 
@@ -15,6 +16,11 @@ export function Landing() {
               <div className = {style.cabeza}>
                 <span className = {style.titulo}>Estamos para ayudarte en tu administración</span>
                 <span className = {style.subTitulo}>Domina tu inventario, impulsa tus ventas: Tu aliado en la gestión empresarial.</span>
+                <div className = {style.bttnP}>
+                <Link to="/logIn">
+                  <button className = {style.bttnInside}>Inicio sesion</button>
+                </Link>
+                </div>
               </div>
               <div className = {style.conteiner2}>
                 <About />

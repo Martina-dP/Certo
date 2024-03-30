@@ -1,6 +1,7 @@
 .nav {
-    background-color: #04265c;
-    color: white;
+    background-image:  url("../../Media/fondoPapel.png");
+    box-shadow: 0 0 1.5em 0 #4f5054;
+    color: #4e6b74;
     padding: 1.6em;
     font-family: 'Montserrat', sans-serif;
 }
@@ -23,7 +24,7 @@
 }
 
 .bttnInside {
-    background-color: #4f5054;
+    background-color: #606060;
     color: white;
     border: none;
     height: 3em;

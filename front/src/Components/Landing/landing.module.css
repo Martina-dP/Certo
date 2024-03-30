@@ -1,35 +1,57 @@
 .total {
     font-family: 'Quicksand';
+    background-image:  url("../Media/fondoPapel.png");
 }
 
 .cabeza {
-    background-image:  url("../Media/back.jpg");
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
-    height: 30em;
-    margin-bottom: 4em;
+    background-position: center; */
+    height: 26em;
     display: grid;
     align-content: center;
     justify-content: center;
-    color: white;
+    color: #4e6b74;
     font-family: 'Quicksand';
+}
+
+.tituloP {
+    display: flex;
+    justify-content: center;
+    font-size: 2.6em;
+    padding-bottom: .4em;
+
 }
 
 .titulo {
     font-size: 2.8em;
     padding-bottom: .4em;
-    
 
 }
 
 .subTitulo {
     display: flex;
     justify-content: center;
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 
 .fuera {
     width: 80%;
     margin: auto;
+}
+
+.bttnP {
+    display: flex;
+    justify-content: center;
+    margin-top: 4em;
+}
+
+.bttnInside {
+    background-color: #4f5054;
+    color: white;
+    border: none;
+    height: 3em;
+    width: 12em;
+    letter-spacing: 0.2em;
+    cursor: pointer;
 }
