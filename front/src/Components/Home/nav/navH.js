@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./navH.module.css"
+import { Link } from "react-router-dom";
 
 const NavHome = () => {
 
@@ -11,7 +12,9 @@ const NavHome = () => {
                         <span className={style.title}>DELPI Tecnología</span>
                     </div>
                     <div>
-                        <button className={style.bttnInside}>Crear cuenta</button>
+                        <Link to="/newAcount">
+                            <button className={style.bttnInside}>Crear cuenta</button>
+                        </Link>
                     </div>
                 </div>
             </div>

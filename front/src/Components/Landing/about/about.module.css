@@ -3,8 +3,7 @@
     grid-template-columns: 45% 45%;
     justify-content: space-evenly;
     align-items: center;
-    padding-top: 2em;
-    padding-bottom: 2em;
+    padding-bottom: 6em;
 }
 
 .tittle {

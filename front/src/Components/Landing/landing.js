@@ -6,6 +6,7 @@ import Work from './work/work';
 import Vision from './vision/vision';
 import Footer from './footer/footer';
 import { Link } from 'react-router-dom';
+import Contact from './contact/contact';
 
 export function Landing() {
 
@@ -22,15 +23,10 @@ export function Landing() {
                 </Link>
                 </div>
               </div>
-              <div className = {style.conteiner2}>
                 <About />
-              </div>
-              <div className = {style.conteiner3}>
                 <Work />
-              </div>
-              <div className = {style.conteiner3}>
                 <Vision />
-              </div>
+                <Contact />
             </div>
             <Footer />
         </div>

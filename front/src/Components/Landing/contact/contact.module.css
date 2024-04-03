@@ -10,9 +10,18 @@
     justify-content: center;
 }
 
-.text {
+.info {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    justify-content: space-evenly;
     font-size: 1.1em;
     color: rgba(0, 0, 0, 0.642);
     width: 95%;
     margin: auto;
 }
+
+.detalle {
+    display: grid;
+    justify-content: center;
+}
+
