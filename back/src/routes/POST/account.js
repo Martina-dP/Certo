@@ -12,7 +12,7 @@ router.post('/', async (req, res) =>{
     try {
         const verificacion = await User.findOne({
             where: {
-              user: user,
+                user: user,
             },
         });
         if(!verificacion){
@@ -27,10 +27,9 @@ router.post('/', async (req, res) =>{
             }).then((user) => res.status(201).send(user))
         } else{
             return res
-              .status(400)
-              .json({ message: "Your email adress is already registered" });
-          }
-      
+                .status(400)
+                .json({ message: "Your email adress is already registered" });
+        }
 
     } catch (error) {
         console.log(error);

@@ -7,6 +7,9 @@ export const POST_USER = "POST_USER";
     // OTROS
 export const LOGIN = "LOGIN";
 
+    // ALTAS
+export const NEW_PRODUCT = "NEW_PRODUCT";
+
     // USERS
 export function getAdmins () {
     return async function(dispatch){
@@ -32,10 +35,20 @@ export function createAccount (input) {
 export function login (input) {
     return async function(dispatch){
         var json = await axios.post(`http://localhost:3001/logIn`, input)
-        console.log(input, "input action")
         return dispatch({
             type : "LOGIN",
             payload : json.data
         })
     }
 }
+
+    // ALTAS
+    export function loadProduct (input) {
+        return async function(dispatch){
+            var json = await axios.post(`http://localhost:3001/newProduct`, input)
+            return dispatch({
+                type : "NEW_PRODUCT",
+                payload : json.data
+            })
+        }
+    }

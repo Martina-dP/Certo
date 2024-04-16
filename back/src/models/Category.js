@@ -1,15 +1,21 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('Role', {
-        roleId:{ 
+    sequelize.define('Category', {
+        categoryId:{ 
             type : DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
+            autoIncrement: true,
         },
-        description:{ 
+        categoty_name:{ 
             type : DataTypes.STRING,
             allowNull: false,
+        },
+        active:{ 
+            type : DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true,
         },
     });
 };

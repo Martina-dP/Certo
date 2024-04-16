@@ -1,0 +1,18 @@
+.backgroundModel {
+    width: 100vw;
+    height: 100vh;
+    background: #4e6b7478;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-49%, -49%);
+}
+
+.contenedorModel {
+    background-color: aquamarine;
+    width: 30em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-49%, -49%);
+}
