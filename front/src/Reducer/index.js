@@ -1,13 +1,15 @@
-import { LOGIN, GET_ADMINS, POST_USER, NEW_PRODUCT } from "../Action/index"
+import { LOGIN, GET_ADMINS, POST_USER, NEW_PRODUCT, GET_CATEGORY, GET_SUB_CATEGORY } from "../Action/index"
 
 const initialState = {
     admin : {},
-    allAdmins : {},
+    allAdmins : [],
     user: {},
     allUsers : {},
     newUser: {},
     loginUser: {},
     newProduct: {},
+    categories: [],
+    subCategories: [],
 };
 
 function rootReducer (state = initialState, { type, payload }) {
@@ -42,6 +44,16 @@ function rootReducer (state = initialState, { type, payload }) {
             return {
                 ...state,
                 newProduct : payload
+            };
+        case GET_CATEGORY :
+            return {
+                ...state,
+                categories : payload,
+            };
+        case GET_SUB_CATEGORY :
+            return {
+                ...state,
+                subCategories : payload,
             };
 
         default: return state;

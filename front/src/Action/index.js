@@ -9,6 +9,8 @@ export const LOGIN = "LOGIN";
 
     // ALTAS
 export const NEW_PRODUCT = "NEW_PRODUCT";
+export const GET_CATEGORY = "GET_CATEGORY";
+export const GET_SUB_CATEGORY = "GET_SUB_CATEGORY";
 
     // USERS
 export function getAdmins () {
@@ -37,6 +39,26 @@ export function login (input) {
         var json = await axios.post(`http://localhost:3001/logIn`, input)
         return dispatch({
             type : "LOGIN",
+            payload : json.data
+        })
+    }
+}
+
+export function getCategories () {
+    return async function(dispatch){
+        var json = await axios.get("http://localhost:3001/categories")
+        return dispatch({
+            type : "GET_CATEGORY",
+            payload : json.data
+        })
+    }
+}
+
+export function getSubCategories () {
+    return async function(dispatch){
+        var json = await axios.get("http://localhost:3001/subCategories")
+        return dispatch({
+            type : "GET_SUB_CATEGORY",
             payload : json.data
         })
     }

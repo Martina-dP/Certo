@@ -15,8 +15,6 @@ function App() {
           <Route path="/main" element= {<Home/>} />
           <Route path="/logIn" element= {<Login/>} />
           <Route path="/newAcount" element= {<SingUp/>} />
-          <Route path="/main/newProduct" element= {<Product/>} />
-          <Route path="/main/newProvider" element= {<Provider/>} />
         </Routes>
     </BrowserRouter>
   );

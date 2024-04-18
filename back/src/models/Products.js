@@ -12,12 +12,15 @@ module.exports = (sequelize) => {
             type : DataTypes.STRING,
             allowNull: false,
         },
-        size:{ 
+        cost:{ 
             type : DataTypes.INTEGER,
+        },
+        size:{ 
+            type : DataTypes.STRING,
             allowNull: false,
         },
         profit_margin:{ 
-            type : DataTypes.STRING,
+            type : DataTypes.INTEGER,
             allowNull: false,
         },
         final_price:{ 

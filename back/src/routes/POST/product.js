@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Product } = require('../../db');
+const { Product, Category } = require('../../db');
 
 const router = Router();
 
@@ -7,6 +7,7 @@ router.post("/", async function( req, res) {
     const {
         productId,
         color,
+        cost,
         size,
         profit_margin,
         final_price,
@@ -18,6 +19,7 @@ router.post("/", async function( req, res) {
         const productAdded = new Product({
             productId: productId,
             color: color,
+            cost: cost,
             size: size,
             profit_margin: profit_margin,
             final_price: final_price,
@@ -29,6 +31,7 @@ router.post("/", async function( req, res) {
 
     try {
         const saveProduct = await productAdded.save()
+        console.log(saveProduct);
 
         res.json(saveProduct);
 

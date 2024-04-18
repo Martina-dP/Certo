@@ -33,7 +33,7 @@ const { Product, Category, Subcategory } = sequelize.models;
 // Aca vendrian las relaciones
 
 Product.belongsTo(Category, { foreignKey: "categoryId", targetKey: 'categoryId',})
-Product.belongsTo(Subcategory, { foreignKey: "subcategoryId", through:"subcategoryId" })
+Product.belongsTo(Subcategory, { foreignKey: "subcategoryId", targetKey:"subcategoryId" })
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

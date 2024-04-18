@@ -1,0 +1,31 @@
+.backgroundModal {
+    width: 100vw;
+    height: 100vh;
+    background: #4e6b7478;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-49%, -49%);
+}
+
+.contenedorModal {
+    width: 30em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-49%, -49%);
+    background-color: #4e6b74eb;
+    box-shadow: 0 0 1.5em 0 #4f5054;
+}
+
+.titulo {
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+}
+
+.footer {
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+}

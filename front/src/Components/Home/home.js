@@ -1,6 +1,7 @@
 import React, { useState }  from "react";
 import NavHome from "./nav/navH"
 import Product from "../Altas/Products/Products";
+import Provider from "../Altas/Provides/Provider";
 import style from "./home.module.css"
 import { Link } from "react-router-dom";
 
@@ -8,6 +9,7 @@ function Home() {
 
   const [optionsAlta, setOptionsAlta] = useState(false)
   const [openModelProduct, setOpenModelProduct] = useState(false)
+  const [openModelProvider, setOpenModelProvider] = useState(false)
 
   return(
       <div className={style.subTotal}>
@@ -25,12 +27,10 @@ function Home() {
               <button onClick={() => setOptionsAlta(!optionsAlta)} className={style.bttn}>Altas</button>
               {optionsAlta === true ?(
               <div>
-                <Link to="newProvider" >
-                  <button className={style.bttnALt}>Nuevo proveedor</button>
-                </Link>
+                <button className={style.bttnALt} onClick={() => setOpenModelProvider(true)}>Nuevo proveedor</button>
+                {openModelProvider && <Provider closeModalProvider={setOpenModelProvider} />}
                 <button className={style.bttnALt} onClick={() => setOpenModelProduct(true)}>Nuevo producto</button>
                 {openModelProduct && <Product closeModalProduct={setOpenModelProduct} />}
-                
               </div>
               ): ""}
             </div>

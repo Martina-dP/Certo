@@ -3,15 +3,21 @@ import {  useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import style from "./provider.module.css"
 
-function Provider() {
+function Provider({closeModalProvider}) {
 
 const navigate = useNavigate();
 const dispatch = useDispatch();
 
 const initialValues = ({
-    user: "",
-    password: "",
+    organization: "",
+    description: "",
+    CUIT: "",
+    address: "",
+    state: "",
+    phone: "",
+    email: "",
 })
 
 const validationSchema = Yup.object().shape({
@@ -30,7 +36,7 @@ const handleSubmit = (input) => {
 };
 
 return(
-    <div>
+    <div className={style.backgroundModal}>
         <Formik
             enableReinitialize
             initialValues={initialValues}
@@ -40,98 +46,87 @@ return(
         {(formik) => {
             const { values, handleChange, errors, touched } = formik;
             return (
-                <Form>
-                    <div>
-                        <div>
-                            <label> Codigo </label>
+                <Form className={style.contenedorModal}>
+                    <div className={style.contenedorBttnClose}>
+                        <button className={style.bttnClose} onClick={() => closeModalProvider(false)}> X </button>
+                    </div>
+                    <div className={style.titulo}>
+                        <span>Alta proveedor</span>
+                    </div>
+                    <div className={style.bodyM}>
+                        <div className={style.seccionM}>
+                            <label> Organizacion </label>
                             <input
                                 type = "text"
-                                placeholder="Codigo"
-                                name = "productId"
-                                value={values.productId}
+                                placeholder="organization"
+                                name = "organization"
+                                value={values.organization}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div>
-                            <label> Nombre del producto </label>
+                        <div className={style.seccionM}>
+                            <label> Descripcion </label>
                             <input
                                 type = "text"
-                                placeholder="Codigo"
-                                name = "productId"
-                                value={values.productId}
+                                placeholder="description"
+                                name = "description"
+                                value={values.description}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div>
-                            <label> Categoria </label>
+                        <div className={style.seccionM}>
+                            <label> CUIT </label>
                             <input
                                 type = "text"
-                                placeholder="Codigo"
-                                name = "productId"
-                                value={values.productId}
+                                placeholder="CUIT"
+                                name = "CUIT"
+                                value={values.CUIT}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div>
-                            <label> Sub categoria </label>
+                        <div className={style.seccionM}>
+                            <label> Direccion </label>
                             <input
                                 type = "text"
-                                placeholder="Codigo"
-                                name = "productId"
-                                value={values.productId}
+                                placeholder="address"
+                                name = "address"
+                                value={values.address}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div>
-                            <label> Minimo stock </label>
+                        <div className={style.seccionM}>
+                            <label> Localidad </label>
                             <input
                                 type = "text"
-                                placeholder="Codigo"
-                                name = "productId"
-                                value={values.productId}
+                                placeholder= "state"
+                                name = "state"
+                                value={values.state}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div>
-                            <label> Precio primario </label>
+                        <div className={style.seccionM}>
+                            <label> Telefono </label>
                             <input
                                 type = "text"
-                                placeholder="Codigo"
-                                name = "productId"
-                                value={values.productId}
+                                placeholder="phone"
+                                name = "phone"
+                                value={values.phone}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div>
-                            <label> Utilidad </label>
+                        <div className={style.seccionM}>
+                            <label> Correo </label>
                             <input
                                 type = "text"
-                                placeholder="Codigo"
-                                name = "productId"
-                                value={values.productId}
+                                placeholder= "email"
+                                name = "email"
+                                value={values.email}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div>
-                            <label> Codigo </label>
-                            <input
-                                type = "text"
-                                placeholder="Codigo"
-                                name = "productId"
-                                value={values.productId}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label> Precio final </label>
-                            <input
-                                type = "text"
-                                placeholder="Codigo"
-                                name = "productId"
-                                value={values.productId}
-                                onChange={handleChange}
-                            />
-                        </div>
+                    </div>
+                    <div className={style.footer}>
+                        <button className={style.bttn}>dar de alta</button>
                     </div>
                 </Form>
             );

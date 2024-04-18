@@ -11,6 +11,8 @@ const login = require("./LOGIN/login")
 
     // Altas
 const newProduct = require("./POST/product")
+const categoryList = require("./GET/Altas/Category")
+const subCategoryList = require("./GET/Altas/SubCategory")
 
 const router = Router();
 
@@ -25,5 +27,7 @@ router.use('/logIn', login);
 
     // Altas
 router.use('/newProduct', newProduct);
+router.use('/categories', categoryList);
+router.use('/subCategories', subCategoryList);
 
 module.exports = router;
