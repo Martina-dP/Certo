@@ -35,7 +35,7 @@ function SingUp() {
   const handleSubmit = (input) => {
       dispatch(createAccount(input)).then((response) => {
         console.log(response.payload, "response")    
-        navigate("/");      
+        navigate("/main");      
       })
         .catch((error) => {
           alert(error.response, "error")    
@@ -126,7 +126,7 @@ function SingUp() {
                   </div>
                 </div>
                 <div className={style.bttnContenedor}>
-                  <button className={style.bttn} type="submit"> Entrar </button>
+                  <button className={style.bttn} type="submit"> Crear </button>
                 </div>
             </Form>
           );

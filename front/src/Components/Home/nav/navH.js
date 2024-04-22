@@ -12,7 +12,7 @@ const NavHome = () => {
                         <span className={style.title}>DELPI Tecnología</span>
                     </div>
                     <div>
-                        <Link to="/newAcount">
+                        <Link to="/main/newAcount">
                             <button className={style.bttnInside}>Crear cuenta</button>
                         </Link>
                     </div>

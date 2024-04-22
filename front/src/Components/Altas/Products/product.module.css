@@ -37,7 +37,7 @@
 .titulo {
     margin: 0 0 1em 0;
     color: white;
-    font-weight: bold;
+    font-size: x-large;
     display: flex;
     justify-content: center;
 }

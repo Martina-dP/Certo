@@ -2,14 +2,17 @@ import React, { useState }  from "react";
 import NavHome from "./nav/navH"
 import Product from "../Altas/Products/Products";
 import Provider from "../Altas/Provides/Provider";
+import NewClient from "../Altas/NewClient/NewClient"
 import style from "./home.module.css"
-import { Link } from "react-router-dom";
 
 function Home() {
 
   const [optionsAlta, setOptionsAlta] = useState(false)
   const [openModelProduct, setOpenModelProduct] = useState(false)
   const [openModelProvider, setOpenModelProvider] = useState(false)
+  const [openModelClient, setOpenModelClient] = useState(false)
+  const [openModelCategory, setOpenModelCategory] = useState(false)
+  const [openModelSubCategory, setOpenModelSubCategory] = useState(false)
 
   return(
       <div className={style.subTotal}>
@@ -26,11 +29,18 @@ function Home() {
             <div>
               <button onClick={() => setOptionsAlta(!optionsAlta)} className={style.bttn}>Altas</button>
               {optionsAlta === true ?(
-              <div>
+              <div className={style.optionsAlta}>
                 <button className={style.bttnALt} onClick={() => setOpenModelProvider(true)}>Nuevo proveedor</button>
                 {openModelProvider && <Provider closeModalProvider={setOpenModelProvider} />}
                 <button className={style.bttnALt} onClick={() => setOpenModelProduct(true)}>Nuevo producto</button>
                 {openModelProduct && <Product closeModalProduct={setOpenModelProduct} />}
+                <button className={style.bttnALt} onClick={() => setOpenModelClient(true)}>Nuevo cliente</button>
+                {openModelClient && <NewClient closeModalClient={setOpenModelClient} />}
+                <button className={style.bttnALt} onClick={() => setOpenModelCategory(true)}>Cargar categorias</button>
+                {openModelClient && <NewClient openModelCategory={setOpenModelCategory} />}
+                <button className={style.bttnALt} onClick={() => setOpenModelSubCategory(true)}>Cargar subcategoria</button>
+                {openModelClient && <NewClient openModelSubCategory={setOpenModelSubCategory} />}
+                <button className={style.bttnALt} >Cargar Bancos</button>
               </div>
               ): ""}
             </div>
