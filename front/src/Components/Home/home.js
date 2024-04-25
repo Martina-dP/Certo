@@ -1,9 +1,12 @@
 import React, { useState }  from "react";
-import NavHome from "./nav/navH"
+import NavHome from "./nav/navH";
 import Product from "../Altas/Products/Products";
 import Provider from "../Altas/Provides/Provider";
-import NewClient from "../Altas/NewClient/NewClient"
+import NewClient from "../Altas/NewClient/NewClient";
+import Category from "../Altas/Category/NewCategoty";
+import NewSubCategory from "../Altas/NewSubCategory/NewSubCategory";
 import style from "./home.module.css"
+import Bank from "../Altas/Bank/Bank";
 
 function Home() {
 
@@ -13,6 +16,7 @@ function Home() {
   const [openModelClient, setOpenModelClient] = useState(false)
   const [openModelCategory, setOpenModelCategory] = useState(false)
   const [openModelSubCategory, setOpenModelSubCategory] = useState(false)
+  const [openModelBank, setOpenModelBank] = useState(false)
 
   return(
       <div className={style.subTotal}>
@@ -37,10 +41,11 @@ function Home() {
                 <button className={style.bttnALt} onClick={() => setOpenModelClient(true)}>Nuevo cliente</button>
                 {openModelClient && <NewClient closeModalClient={setOpenModelClient} />}
                 <button className={style.bttnALt} onClick={() => setOpenModelCategory(true)}>Cargar categorias</button>
-                {openModelClient && <NewClient openModelCategory={setOpenModelCategory} />}
+                {openModelCategory && <Category closeModalCategory={setOpenModelCategory} />}
                 <button className={style.bttnALt} onClick={() => setOpenModelSubCategory(true)}>Cargar subcategoria</button>
-                {openModelClient && <NewClient openModelSubCategory={setOpenModelSubCategory} />}
-                <button className={style.bttnALt} >Cargar Bancos</button>
+                {openModelSubCategory && <NewSubCategory closeModalSubategory={setOpenModelSubCategory} />}
+                <button className={style.bttnALt}  onClick={() => setOpenModelBank(true)}>Cargar Bancos</button>
+                {openModelBank && <Bank closeModalBank={setOpenModelBank} />}
               </div>
               ): ""}
             </div>

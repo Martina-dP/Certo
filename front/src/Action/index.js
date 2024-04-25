@@ -8,8 +8,11 @@ export const POST_USER = "POST_USER";
 export const LOGIN = "LOGIN";
 
     // ALTAS
+export const NEW_CLIENT = "NEW_CLIENT"
 export const NEW_PRODUCT = "NEW_PRODUCT";
 export const GET_CATEGORY = "GET_CATEGORY";
+export const NEW_CATEGORY = "NEW_CATEGORY";
+export const NEW_SUB_CATEGORY = "NEW_SUB_CATEGORY";
 export const GET_SUB_CATEGORY = "GET_SUB_CATEGORY";
 
     // USERS
@@ -65,11 +68,42 @@ export function getSubCategories () {
 }
 
     // ALTAS
+    export function loadClient (input) {
+        return async function(dispatch){
+            var json = await axios.post(`http://localhost:3001/newClient`, input)
+            return dispatch({
+                type : "NEW_CLIENT",
+                payload : json.data
+            })
+        }
+    }
+
     export function loadProduct (input) {
         return async function(dispatch){
             var json = await axios.post(`http://localhost:3001/newProduct`, input)
             return dispatch({
                 type : "NEW_PRODUCT",
+                payload : json.data
+            })
+        }
+    }
+
+    export function loadCategory (input) {
+        return async function(dispatch){
+            var json = await axios.post(`http://localhost:3001/loadCategory`, input)
+            return dispatch({
+                type : "NEW_CATEGORY",
+                payload : json.data
+            })
+        }
+    }
+
+    export function loadSubCategory (input) {
+        return async function(dispatch){
+            var json = await axios.post(`http://localhost:3001/loadSubCategory`, input)
+            console.log(json, "json action")
+            return dispatch({
+                type : "NEW_SUB_CATEGORY",
                 payload : json.data
             })
         }

@@ -35,6 +35,9 @@ const { Product, Category, Subcategory } = sequelize.models;
 Product.belongsTo(Category, { foreignKey: "categoryId", targetKey: 'categoryId',})
 Product.belongsTo(Subcategory, { foreignKey: "subcategoryId", targetKey:"subcategoryId" })
 
+Category.hasMany(Subcategory)
+Subcategory.belongsTo(Category, { foreignKey: "categoryId", targetKey: 'categoryId'})
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');

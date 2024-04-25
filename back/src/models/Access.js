@@ -5,6 +5,7 @@ module.exports = (sequelize) => {
       roleId:{ 
         type : DataTypes.INTEGER,
         allowNull: false,
+        primaryKey: true,
       },
       superAdmin: {
         type : DataTypes.BOOLEAN,

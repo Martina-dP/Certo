@@ -10,8 +10,11 @@ const userPost = require("./POST/account")
 const login = require("./LOGIN/login")
 
     // Altas
+const newClient = require("./POST/client")
 const newProduct = require("./POST/product")
 const categoryList = require("./GET/Altas/Category")
+const newCategory = require("./POST/category")
+const newSubCategory = require("./POST/subCategory")
 const subCategoryList = require("./GET/Altas/SubCategory")
 
 const router = Router();
@@ -26,8 +29,11 @@ router.use('/createUser', userPost);
 router.use('/logIn', login);
 
     // Altas
+router.use('/newClient', newClient);
 router.use('/newProduct', newProduct);
 router.use('/categories', categoryList);
+router.use('/loadCategory', newCategory);
+router.use('/loadSubCategory', newSubCategory);
 router.use('/subCategories', subCategoryList);
 
 module.exports = router;

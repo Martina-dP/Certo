@@ -11,10 +11,10 @@ module.exports = (sequelize) => {
         categoty_name:{ 
             type : DataTypes.STRING,
             allowNull: false,
+            unique: true
         },
         active:{ 
             type : DataTypes.BOOLEAN,
-            allowNull: false,
             defaultValue: true,
         },
     });
