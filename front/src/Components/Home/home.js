@@ -7,6 +7,7 @@ import Category from "../Altas/Category/NewCategoty";
 import NewSubCategory from "../Altas/NewSubCategory/NewSubCategory";
 import style from "./home.module.css"
 import Bank from "../Altas/Bank/Bank";
+import PreBill from "../CashMovement/PreBill/PreBill"
 
 function Home() {
 
@@ -18,6 +19,9 @@ function Home() {
   const [openModelSubCategory, setOpenModelSubCategory] = useState(false)
   const [openModelBank, setOpenModelBank] = useState(false)
 
+  const [optionsCashMove, setOptionsCashMove] = useState(false)
+  const [openPreBill, setOpenPreBill] = useState(false)
+
   return(
       <div className={style.subTotal}>
         <div className={style.contenedor}>
@@ -28,7 +32,13 @@ function Home() {
               <button className={style.bttn}>Stock</button>
             </div>
             <div>
-              <button className={style.bttn}>Movimineto de caja</button>
+              <button onClick={() => setOptionsCashMove(!optionsCashMove)} className={style.bttn}>Movimineto de caja</button>
+              {optionsCashMove === true ?(
+              <div className={style.optionsCashMove}>
+                <button className={style.bttnALt} onClick={() => setOpenPreBill(true)}>Nueva factura</button>
+                {openPreBill && <PreBill closeModalPreBill={setOpenPreBill} />}
+              </div>
+              ): ""}
             </div>
             <div>
               <button onClick={() => setOptionsAlta(!optionsAlta)} className={style.bttn}>Altas</button>
