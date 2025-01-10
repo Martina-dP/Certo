@@ -16,6 +16,7 @@ const categoryList = require("./GET/Altas/Category")
 const newCategory = require("./POST/category")
 const newSubCategory = require("./POST/subCategory")
 const subCategoryList = require("./GET/Altas/SubCategory")
+const newProvider = require("./POST/provider")
 
     // Mov. caja
 const newBill = require("./POST/bill")
@@ -38,6 +39,7 @@ router.use('/categories', categoryList);
 router.use('/loadCategory', newCategory);
 router.use('/loadSubCategory', newSubCategory);
 router.use('/subCategories', subCategoryList);
+router.use('/newProvider', newProvider);
 
     // Mov. caja
 router.use('/newBill', newBill);
