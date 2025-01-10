@@ -1,37 +1,39 @@
 const { Router } = require("express");
-const { Category } = require('../../db');
+const { Category } = require("../../db");
 
 const router = Router();
 
-router.post("/", async function( req, res) {
-    const {
-        categoryId,
-        categoty_name,
-        active
-    } = req.body;
+router.post("/", async (req, res) => {
+    const { categoryId, category_name, active } = req.body;
+
+    // Validación básica
+    if (!category_name) {
+        return res.status(400).json({ message: "Category name is required" });
+    }
 
     try {
-        const verificacion = await Category.findOne({
-            where: {
-                categoty_name: categoty_name,
-            },
+        // Verificar si la categoría ya existe
+        const existingCategory = await Category.findOne({
+            where: { category_name },
         });
-        if(!verificacion){
 
-            Category.create({
-                categoryId: categoryId,
-                categoty_name: categoty_name,
-                active: active
-            }).then((categoria) => res.status(201).send(categoria))
-        } else{
+        if (existingCategory) {
             return res
                 .status(400)
-                .json({ message: "Categoria existente" });
+                .json({ message: "Category already exists" });
         }
 
+        // Crear nueva categoría
+        const newCategory = await Category.create({
+            categoryId,
+            category_name,
+            active,
+        });
+
+        res.status(201).send(newCategory);
     } catch (err) {
-        console.log(err, "aca estoy")
-        res.json(err);
+        console.error("Error creating category:", err);
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 

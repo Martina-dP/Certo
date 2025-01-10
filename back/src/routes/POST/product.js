@@ -1,9 +1,9 @@
 const { Router } = require("express");
-const { Product, Category } = require('../../db');
+const { Product } = require("../../db");
 
 const router = Router();
 
-router.post("/", async function( req, res) {
+router.post("/", async (req, res) => {
     const {
         productId,
         color,
@@ -14,30 +14,33 @@ router.post("/", async function( req, res) {
         min_stock,
         categoryId,
         subcategoryId,
-        active} = req.body;
+        active,
+    } = req.body;
 
-        const productAdded = new Product({
-            productId: productId,
-            color: color,
-            cost: cost,
-            size: size,
-            profit_margin: profit_margin,
-            final_price: final_price,
-            min_stock: min_stock,
-            categoryId: categoryId,
-            subcategoryId: subcategoryId,
-            active: active
-        })
+    // Validación básica
+    if (!productId || !color || !cost || !size) {
+        return res.status(400).json({ message: "Missing required fields" });
+    }
 
     try {
-        const saveProduct = await productAdded.save()
-        console.log(saveProduct);
+        // Crear y guardar el producto
+        const newProduct = await Product.create({
+            productId,
+            color,
+            cost,
+            size,
+            profit_margin,
+            final_price,
+            min_stock,
+            categoryId,
+            subcategoryId,
+            active,
+        });
 
-        res.json(saveProduct);
-
+        res.status(201).json(newProduct);
     } catch (err) {
-        console.log(err)
-        res.json(err);
+        console.error("Error creating product:", err);
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 

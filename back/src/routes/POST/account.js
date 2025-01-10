@@ -1,39 +1,45 @@
 const { Router } = require("express");
-const router = Router();
-const { User } = require('../../db');
 const bcryptjs = require("bcryptjs");
+const { User } = require("../../db");
 
-router.post('/', async (req, res) =>{
+const router = Router();
 
+router.post("/", async (req, res) => {
     const { id, name, lastName, user, password, active, role } = req.body;
 
-    let passwordHash = await bcryptjs.hash(password, 8);
+    // Validación básica
+    if (!name || !user || !password) {
+        return res.status(400).json({ message: "Missing required fields" });
+    }
 
     try {
-        const verificacion = await User.findOne({
-            where: {
-                user: user,
-            },
-        });
-        if(!verificacion){
-            User.create({
-                id:id, 
-                name:name, 
-                lastName:lastName, 
-                user:user, 
-                password: passwordHash, 
-                active:active, 
-                role:role
-            }).then((user) => res.status(201).send(user))
-        } else{
+        // Verificar usuario duplicado
+        const existingUser = await User.findOne({ where: { user } });
+        if (existingUser) {
             return res
                 .status(400)
-                .json({ message: "Your email adress is already registered" });
+                .json({ message: "User already registered" });
         }
 
+        // Hash de la contraseña
+        const passwordHash = await bcryptjs.hash(password, 10);
+
+        // Crear usuario
+        const newUser = await User.create({
+            id,
+            name,
+            lastName,
+            user,
+            password: passwordHash,
+            active,
+            role,
+        });
+
+        res.status(201).send(newUser);
     } catch (error) {
-        console.log(error);
-    }  
-})
+        console.error("Error creating user:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
 
 module.exports = router;

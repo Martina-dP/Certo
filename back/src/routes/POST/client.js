@@ -1,50 +1,55 @@
 const { Router } = require("express");
+const { Client } = require("../../db");
+
 const router = Router();
-const { Client } = require('../../db');
 
-router.post('/', async (req, res) =>{
-
-    const { 
+router.post("/", async (req, res) => {
+    const {
         clientId,
         name,
         lastName,
         DNI,
         taxStatus,
         birthday,
-        authorized_margin,
+        authorizedMargin,
         address,
         state,
-        active 
+        active,
     } = req.body;
 
+    // Validación básica
+    if (!DNI || !name || !lastName) {
+        return res.status(400).json({ message: "Missing required fields" });
+    }
+
     try {
-        const verificacion = await Client.findOne({
-            where: {
-                DNI: DNI,
-            },
-        });
-        if(!verificacion){
-            Client.create({
-                clientId: clientId,
-                name: name,
-                lastName: lastName,
-                DNI: DNI,
-                taxStatus: taxStatus,
-                birthday: birthday,
-                authorized_margin: authorized_margin,
-                address: address,
-                state: state,
-                active: active 
-            }).then((client) => res.status(201).send(client))
-        } else{
+        // Verificar si el cliente ya existe
+        const existingClient = await Client.findOne({ where: { DNI } });
+        if (existingClient) {
             return res
                 .status(400)
-                .json({ message: "Your DNI already registered" });
+                .json({ message: "Client with this DNI already exists" });
         }
 
+        // Crear nuevo cliente
+        const newClient = await Client.create({
+            clientId,
+            name,
+            lastName,
+            DNI,
+            taxStatus,
+            birthday,
+            authorizedMargin,
+            address,
+            state,
+            active,
+        });
+
+        res.status(201).send(newClient);
     } catch (error) {
-        console.log(error);
-    }  
-})
+        console.error("Error creating client:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
 
 module.exports = router;

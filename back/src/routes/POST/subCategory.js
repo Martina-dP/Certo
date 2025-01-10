@@ -1,40 +1,40 @@
 const { Router } = require("express");
-const { Subcategory } = require('../../db');
+const { Subcategory } = require("../../db");
 
 const router = Router();
 
-router.post("/", async function( req, res) {
-    const {
-        subcategoryId,
-        sub_categoty_name,
-        categoryId,
-        active
-    } = req.body;
+router.post("/", async (req, res) => {
+    const { subcategoryId, sub_category_name, categoryId, active } = req.body;
+
+    // Validación básica
+    if (!sub_category_name || !categoryId) {
+        return res.status(400).json({ message: "Missing required fields" });
+    }
 
     try {
-        const verificacion = await Subcategory.findOne({
-            where: {
-                sub_categoty_name: sub_categoty_name,
-            },
+        // Verificar si la subcategoría ya existe
+        const existingSubcategory = await Subcategory.findOne({
+            where: { sub_category_name },
         });
-        
-        if(!verificacion){
 
-            Subcategory.create({
-                subcategoryId: subcategoryId,
-                sub_categoty_name: sub_categoty_name,
-                categoryId: categoryId,
-                active: active
-            }).then((subCategoria) => res.status(201).send(subCategoria))
-        } else{
+        if (existingSubcategory) {
             return res
                 .status(400)
-                .json({ message: "Sub categoria existente" });
+                .json({ message: "Subcategory already exists" });
         }
 
+        // Crear nueva subcategoría
+        const newSubcategory = await Subcategory.create({
+            subcategoryId,
+            sub_category_name,
+            categoryId,
+            active,
+        });
+
+        res.status(201).json(newSubcategory);
     } catch (err) {
-        console.log(err, "ACA ESTOY")
-        res.json(err);
+        console.error("Error creating subcategory:", err);
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 
