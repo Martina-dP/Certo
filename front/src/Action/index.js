@@ -14,6 +14,7 @@ export const GET_CATEGORY = "GET_CATEGORY";
 export const NEW_CATEGORY = "NEW_CATEGORY";
 export const NEW_SUB_CATEGORY = "NEW_SUB_CATEGORY";
 export const GET_SUB_CATEGORY = "GET_SUB_CATEGORY";
+export const NEW_PROVIDER = "NEW_PROVIDER";
 
     // USERS
 export function getAdmins () {
@@ -104,6 +105,17 @@ export function getSubCategories () {
             console.log(json, "json action")
             return dispatch({
                 type : "NEW_SUB_CATEGORY",
+                payload : json.data
+            })
+        }
+    }
+
+    export function loadProvider (input) {
+        return async function(dispatch){
+            var json = await axios.post(`http://localhost:3001/newProvider`, input)
+            console.log(json, "json action")
+            return dispatch({
+                type : "NEW_PROVIDER",
                 payload : json.data
             })
         }

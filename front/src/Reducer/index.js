@@ -1,10 +1,20 @@
-import { LOGIN, GET_ADMINS, POST_USER, NEW_PRODUCT, GET_CATEGORY, GET_SUB_CATEGORY, NEW_CATEGORY, NEW_SUB_CATEGORY } from "../Action/index"
+import { 
+    LOGIN, 
+    GET_ADMINS, 
+    POST_USER, 
+    NEW_PRODUCT, 
+    GET_CATEGORY, 
+    GET_SUB_CATEGORY, 
+    NEW_CATEGORY, 
+    NEW_SUB_CATEGORY, 
+    NEW_PROVIDER 
+} from "../Action/index";
 
 const initialState = {
-    admin : {},
-    allAdmins : [],
+    admin: {},
+    allAdmins: [],
     user: {},
-    allUsers : {},
+    allUsers: {},
     newUser: {},
     loginUser: {},
     newProduct: {},
@@ -14,61 +24,67 @@ const initialState = {
     subCategories: [],
 };
 
-function rootReducer (state = initialState, { type, payload }) {
-    switch(type) {
+function rootReducer(state = initialState, { type, payload }) {
+    switch (type) {
         // USERS
-        case GET_ADMINS :
+        case GET_ADMINS:
             return {
                 ...state,
-                admin : payload,
-                allAdmins : payload
+                admin: payload,
+                allAdmins: payload
             };
-        case POST_USER :
+        case POST_USER:
             return {
                 ...state,
-                newUser : payload,
+                newUser: payload,
             };
-        // OTROS
-        case LOGIN :
+        case LOGIN:
             const { user, password, token, id, validate } = payload;
             return {
                 ...state,
                 loginUser: {
-                    user, 
+                    user,
                     password,
                     token,
                     id,
                     validate
                 },
             };
-            // ALTAS
-        case NEW_PRODUCT :
+        // PRODUCTS
+        case NEW_PRODUCT:
             return {
                 ...state,
-                newProduct : payload
+                newProduct: payload
             };
-        case GET_CATEGORY :
+        // CATEGORIES
+        case GET_CATEGORY:
             return {
                 ...state,
-                categories : payload,
+                categories: payload,
             };
-        case NEW_CATEGORY :
+        case NEW_CATEGORY:
             return {
                 ...state,
-                newCategory : payload,
+                newCategory: payload,
             };
-        case NEW_SUB_CATEGORY :
+        // SUB-CATEGORIES
+        case NEW_SUB_CATEGORY:
             return {
                 ...state,
-                newSubCategory : payload,
+                newSubCategory: payload,
             };
-        case GET_SUB_CATEGORY :
+        case GET_SUB_CATEGORY:
             return {
                 ...state,
-                subCategories : payload,
+                subCategories: payload,
             };
-
-        default: return state;
+        // PROVIDERS
+        case NEW_PROVIDER:
+            return {
+                ...state,
+            };
+        default: 
+            return state;
     }
 }
 

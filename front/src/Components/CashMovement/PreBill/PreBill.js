@@ -7,6 +7,8 @@ function PreBill ({closeModalPreBill}) {
     const [openA, setOpenA] = useState(false)
     const [openB, setOpenB] = useState(false)
 
+    
+
 return(
     <div className={style.backgroundModal}>
         <div className={style.contenedorModel}>

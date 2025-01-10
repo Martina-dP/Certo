@@ -1,16 +1,14 @@
 import React from "react";
-import {  useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Form, Formik } from "formik";
+import { useDispatch } from "react-redux";
+import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import style from "./provider.module.css"
+import { loadProvider } from "../../../Action/index";
+import style from "./provider.module.css";
 
-function Provider({closeModalProvider}) {
-
-const navigate = useNavigate();
+function Provider({ closeModalProvider }) {
 const dispatch = useDispatch();
 
-const initialValues = ({
+const initialValues = {
     organization: "",
     description: "",
     CUIT: "",
@@ -18,121 +16,133 @@ const initialValues = ({
     state: "",
     phone: "",
     email: "",
-})
-
-const validationSchema = Yup.object().shape({
-    user: Yup.string().required("El nombre de usuario es requerido"),
-});
-
-const handleSubmit = (input) => {
-    // dispatch(login(input)).then((response) => {
-    //     console.log(response.payload, "response")    
-    //     navigate("/main");      
-    // })
-    // .catch((error) => {
-    //     alert(error.response.data.msg, "error")    
-    //     console.log(error.response.data, "response")  
-    // });
 };
 
-return(
-    <div className={style.backgroundModal}>
+const validationSchema = Yup.object().shape({
+    organization: Yup.string().required("El nombre de la organización es requerido"),
+    description: Yup.string().required("La descripción es requerida"),
+    CUIT: Yup.string()
+    .required("El CUIT es requerido")
+    .matches(/^\d{11}$/, "El CUIT debe tener 11 dígitos"),
+    address: Yup.string().required("La dirección es requerida"),
+    state: Yup.string().required("La localidad es requerida"),
+    phone: Yup.string()
+    .required("El teléfono es requerido")
+    .matches(/^\d+$/, "El teléfono debe contener solo números"),
+    email: Yup.string()
+    .required("El correo electrónico es requerido")
+    .email("El correo electrónico no es válido"),
+});
+
+const handleSubmit = (values, { resetForm }) => {
+    dispatch(loadProvider(values))
+    .then(() => {
+        alert("Proveedor creado exitosamente");
+        resetForm();
+        closeModalProvider(false);
+    })
+    .catch((error) => {
+        console.error("Error al crear el proveedor:", error);
+        alert(error.response?.data?.message || "Ocurrió un error inesperado");
+    });
+};
+
+    return (
+        <div className={style.backgroundModal}>
         <Formik
-            enableReinitialize
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
         >
-        {(formik) => {
-            const { values, handleChange, errors, touched } = formik;
-            return (
-                <Form className={style.contenedorModal}>
-                    <div className={style.contenedorBttnClose}>
-                        <button className={style.bttnClose} onClick={() => closeModalProvider(false)}> X </button>
-                    </div>
-                    <div className={style.titulo}>
-                        <span>Alta proveedor</span>
-                    </div>
-                    <div className={style.bodyM}>
-                        <div className={style.seccionM}>
-                            <label> Organizacion </label>
-                            <input
-                                type = "text"
-                                placeholder="organization"
-                                name = "organization"
-                                value={values.organization}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Descripcion </label>
-                            <input
-                                type = "text"
-                                placeholder="description"
-                                name = "description"
-                                value={values.description}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> CUIT </label>
-                            <input
-                                type = "text"
-                                placeholder="CUIT"
-                                name = "CUIT"
-                                value={values.CUIT}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Direccion </label>
-                            <input
-                                type = "text"
-                                placeholder="address"
-                                name = "address"
-                                value={values.address}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Localidad </label>
-                            <input
-                                type = "text"
-                                placeholder= "state"
-                                name = "state"
-                                value={values.state}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Telefono </label>
-                            <input
-                                type = "text"
-                                placeholder="phone"
-                                name = "phone"
-                                value={values.phone}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Correo </label>
-                            <input
-                                type = "text"
-                                placeholder= "email"
-                                name = "email"
-                                value={values.email}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </div>
-                    <div className={style.footer}>
-                        <button className={style.bttn}>dar de alta</button>
-                    </div>
-                </Form>
-            );
-        }}
+            {({ handleChange }) => (
+            <Form className={style.contenedorModal}>
+                <div className={style.contenedorBttnClose}>
+                <button
+                    type="button"
+                    className={style.bttnClose}
+                    onClick={() => closeModalProvider(false)}
+                >
+                    X
+                </button>
+                </div>
+                <div className={style.titulo}>
+                <span>Alta Proveedor</span>
+                </div>
+                <div className={style.bodyM}>
+                <div className={style.seccionM}>
+                    <label>Organización</label>
+                    <Field
+                    type="text"
+                    name="organization"
+                    placeholder="Nombre de la organización"
+                    />
+                    <ErrorMessage name="organization" component="div" className={style.errorMessage} />
+                </div>
+                <div className={style.seccionM}>
+                    <label>Descripción</label>
+                    <Field
+                    type="text"
+                    name="description"
+                    placeholder="Descripción"
+                    />
+                    <ErrorMessage name="description" component="div" className={style.errorMessage} />
+                </div>
+                <div className={style.seccionM}>
+                    <label>CUIT</label>
+                    <Field
+                    type="text"
+                    name="CUIT"
+                    placeholder="CUIT (11 dígitos)"
+                    />
+                    <ErrorMessage name="CUIT" component="div" className={style.errorMessage} />
+                </div>
+                <div className={style.seccionM}>
+                    <label>Dirección</label>
+                    <Field
+                    type="text"
+                    name="address"
+                    placeholder="Dirección"
+                    />
+                    <ErrorMessage name="address" component="div" className={style.errorMessage} />
+                </div>
+                <div className={style.seccionM}>
+                    <label>Localidad</label>
+                    <Field
+                    type="text"
+                    name="state"
+                    placeholder="Localidad"
+                    />
+                    <ErrorMessage name="state" component="div" className={style.errorMessage} />
+                </div>
+                <div className={style.seccionM}>
+                    <label>Teléfono</label>
+                    <Field
+                    type="text"
+                    name="phone"
+                    placeholder="Teléfono (solo números)"
+                    />
+                    <ErrorMessage name="phone" component="div" className={style.errorMessage} />
+                </div>
+                <div className={style.seccionM}>
+                    <label>Correo Electrónico</label>
+                    <Field
+                    type="email"
+                    name="email"
+                    placeholder="Correo Electrónico"
+                    />
+                    <ErrorMessage name="email" component="div" className={style.errorMessage} />
+                </div>
+                </div>
+                <div className={style.footer}>
+                <button type="submit" className={style.bttn}>
+                    Dar de Alta
+                </button>
+                </div>
+            </Form>
+            )}
         </Formik>
-    </div>
-)} 
+        </div>
+    );
+}
 
 export default Provider;

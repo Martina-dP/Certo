@@ -1,189 +1,172 @@
 import React, { useEffect, useState } from "react";
-import {  useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories, getSubCategories } from "../../../Action/index"
-import { Form, Formik } from "formik";
+import { getCategories, getSubCategories, createProduct } from "../../../Action/index";
+import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import style from "./product.module.css"
+import style from "./product.module.css";
 
-function Product({closeModalProduct}) {
+function Product({ closeModalProduct }) {
+const [selectedOptionCategory, setSelectedOptionCategory] = useState("");
 
-const [selectedOptionCategory, setSelectedOptionCategory] = useState('');
-const [selectedOptionSubCategory, setSelectedOptionSubCategory] = useState('');
-
-const navigate = useNavigate();
 const dispatch = useDispatch();
 
-
 useEffect(() => {
-    dispatch(getCategories()); 
+    dispatch(getCategories());
     dispatch(getSubCategories());
-    },[dispatch])
+}, [dispatch]);
 
-const categoryList = useSelector((state) => state.categories)
-const subCategoryList = useSelector((state) => state.subCategories)
+const categoryList = useSelector((state) => state.categories);
+const subCategoryList = useSelector((state) => state.subCategories);
 
-const initialValues = ({
+const initialValues = {
     productId: "",
+    productName: "",
     color: "",
     size: "",
     profit_margin: "",
     final_price: "",
     categoryId: "",
     subcategoryId: "",
-    min_stock: ""
-})
+    min_stock: "",
+};
 
 const validationSchema = Yup.object().shape({
-    user: Yup.string().required("El nombre de usuario es requerido"),
+    productId: Yup.string().required("El código del producto es requerido"),
+    productName: Yup.string().required("El nombre del producto es requerido"),
+    color: Yup.string().required("El color es requerido"),
+    size: Yup.string().required("La talla es requerida"),
+    profit_margin: Yup.number()
+    .required("El porcentaje de ganancia es requerido")
+    .min(0, "Debe ser mayor o igual a 0"),
+    final_price: Yup.number()
+    .required("El precio final es requerido")
+    .min(0, "Debe ser mayor o igual a 0"),
+    categoryId: Yup.string().required("La categoría es requerida"),
+    subcategoryId: Yup.string().required("La subcategoría es requerida"),
+    min_stock: Yup.number()
+    .required("El stock mínimo es requerido")
+    .min(0, "Debe ser mayor o igual a 0"),
 });
 
-const handleSelectChange = (event) => {
-    setSelectedOptionCategory(event.target.value);
-    setSelectedOptionSubCategory(event.target.value);
-    console.log(selectedOptionCategory, "selectedOptionCategory")
-console.log(selectedOptionSubCategory, "selectedOptionSubCategory")
+const handleSubmit = (values, { resetForm }) => {
+    dispatch(createProduct(values))
+    .then(() => {
+        alert("Producto creado exitosamente");
+        resetForm();
+        closeModalProduct(false);
+    })
+    .catch((error) => {
+        console.error("Error al crear el producto:", error);
+        alert(error.response?.data?.message || "Ocurrió un error inesperado");
+    });
 };
 
+const filteredSubCategories = subCategoryList.filter(
+    (subCat) => subCat.categoryId === selectedOptionCategory
+);
 
-const handleSubmit = (input) => {
-    // dispatch(login(input)).then((response) => {
-    //     console.log(response.payload, "response")    
-    //     navigate("/main");      
-    // })
-    // .catch((error) => {
-    //     alert(error.response.data.msg, "error")    
-    //     console.log(error.response.data, "response")  
-    // });
-};
-
-return(
-    <div className={style.backgroundModel}>
+    return (
+        <div className={style.backgroundModel}>
         <Formik
-            enableReinitialize
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
         >
-        {(formik) => {
-            const { values, handleChange, errors, touched } = formik;
-            return (
-                <Form className={style.contenedorModel}>
-                    <div className={style.contenedorBttnClose}>
-                        <button className={style.bttnClose} onClick={() => closeModalProduct(false)}> X </button>
+            {({ values, handleChange }) => (
+            <Form className={style.contenedorModel}>
+                <div className={style.contenedorBttnClose}>
+                <button
+                    type="button"
+                    className={style.bttnClose}
+                    onClick={() => closeModalProduct(false)}
+                >
+                    X
+                </button>
+                </div>
+                <div className={style.titulo}>
+                <span>Alta Producto</span>
+                </div>
+                <div className={style.bodyM}>
+                <div className={style.seccionM}>
+                    <label>Código</label>
+                    <Field
+                    type="text"
+                    name="productId"
+                    placeholder="Código del producto"
+                    />
+                    <ErrorMessage name="productId" component="div" className={style.errorMessage} />
+                </div>
+                <div className={style.seccionM}>
+                    <label>Nombre del producto</label>
+                    <Field
+                    type="text"
+                    name="productName"
+                    placeholder="Nombre del producto"
+                    />
+                    <ErrorMessage name="productName" component="div" className={style.errorMessage} />
+                </div>
+                <div className={style.seccionM}>
+                    <label>Stock mínimo</label>
+                    <Field
+                    type="number"
+                    name="min_stock"
+                    placeholder="Stock mínimo"
+                    />
+                    <ErrorMessage name="min_stock" component="div" className={style.errorMessage} />
+                </div>
+                <div className={style.seccionM}>
+                    <label>Categoría</label>
+                    <Field
+                    as="select"
+                    name="categoryId"
+                    onChange={(e) => {
+                        handleChange(e);
+                        setSelectedOptionCategory(e.target.value);
+                    }}
+                    >
+                    <option value="">Seleccione una categoría</option>
+                    {categoryList.map((option) => (
+                        <option key={option.categoryId} value={option.categoryId}>
+                        {option.category_name}
+                        </option>
+                    ))}
+                    </Field>
+                    <ErrorMessage name="categoryId" component="div" className={style.errorMessage} />
+                </div>
+                <div className={style.seccionM}>
+                    <label>Subcategoría</label>
+                    <Field as="select" name="subcategoryId">
+                    <option value="">Seleccione una subcategoría</option>
+                    {filteredSubCategories.map((option) => (
+                        <option key={option.subcategoryId} value={option.subcategoryId}>
+                        {option.sub_category_name}
+                        </option>
+                    ))}
+                    </Field>
+                    <ErrorMessage name="subcategoryId" component="div" className={style.errorMessage} />
+                </div>
+                {["profit_margin", "final_price", "color", "size"].map((field) => (
+                    <div key={field} className={style.seccionM}>
+                    <label>{field.replace("_", " ").toUpperCase()}</label>
+                    <Field
+                        type="text"
+                        name={field}
+                        placeholder={field.replace("_", " ").toUpperCase()}
+                    />
+                    <ErrorMessage name={field} component="div" className={style.errorMessage} />
                     </div>
-                    <div className={style.titulo}>
-                        <span>Alta producto</span>
-                    </div>
-                    <div className={style.bodyM}>
-                        <div className={style.seccionM}>
-                            <label> Codigo </label>
-                            <input
-                                type = "text"
-                                placeholder="Codigo"
-                                name = "productId"
-                                value={values.productId}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <br />
-                        <div className={style.seccionM}>
-                            <label> Nombre del producto </label>
-                            <input
-                                type = "text"
-                                placeholder="Codigo"
-                                name = "productId"
-                                value={values.productId}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Minimo stock </label>
-                            <input
-                                type = "text"
-                                placeholder="Codigo"
-                                name = "min_stock"
-                                value={values.min_stock}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Categoria </label>
-                            <select value={selectedOptionCategory} onChange={handleSelectChange}>
-                                <option value="">Select an option</option>
-                                    {categoryList.map((option) => (
-                                <option key={option.categoryId} value={option.categoryId}>{option.categoty_name}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Costo </label>
-                            <input
-                                type = "text"
-                                placeholder= "porcentaje de ganancia"
-                                name = "profit_margin"
-                                value={values.profit_margin}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Sub categoria </label>
-                            <select value={selectedOptionSubCategory} onChange={handleSelectChange}>
-                                <option value="">Select an option</option>
-                                {subCategoryList.map((optionSB) => (
-                                    <option key={optionSB.subcategoryId} value={optionSB.subcategoryId}>{optionSB.sub_categoty_name}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> % Utilidad </label>
-                            <input
-                                type = "text"
-                                placeholder= "porcentaje de ganancia"
-                                name = "profit_margin"
-                                value={values.profit_margin}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Color </label>
-                            <input
-                                type = "text"
-                                placeholder="Color"
-                                name = "color"
-                                value={values.color}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Precio final </label>
-                            <input
-                                type = "text"
-                                placeholder="Total"
-                                name = "final_price"
-                                value={values.final_price}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={style.seccionM}>
-                            <label> Talla </label>
-                            <input
-                                type = "text"
-                                placeholder="Talla"
-                                name = "size"
-                                value={values.size}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </div>
-                    <div className={style.footer}>
-                        <button className={style.bttn}>dar de alta</button>
-                    </div>
-                </Form>
-            );
-        }}
+                ))}
+                </div>
+                <div className={style.footer}>
+                <button type="submit" className={style.bttn}>
+                    Dar de Alta
+                </button>
+                </div>
+            </Form>
+            )}
         </Formik>
-    </div>
-)} 
+        </div>
+    );
+}
 
 export default Product;

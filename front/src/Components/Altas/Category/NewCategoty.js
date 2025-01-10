@@ -1,73 +1,90 @@
 import React from "react";
-import {  useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Form, Formik } from "formik";
-import { loadCategory } from "../../../Action/index";
+import { useDispatch } from "react-redux";
+import { Form, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import style from "./category.module.css"
+import { loadCategory } from "../../../Action/index";
+import style from "./category.module.css";
 
-function Category({closeModalCategory}) {
-
-const navigate = useNavigate();
+function Category({ closeModalCategory }) {
 const dispatch = useDispatch();
 
-const initialValues = ({
-    categoty_name: "" ,
-})
+  // Valores iniciales del formulario
+const initialValues = {
+    category_name: "",
+};
 
+  // Esquema de validación
 const validationSchema = Yup.object().shape({
-    categoty_name: Yup.string().required("El nombre de usuario es requerido"),
+    category_name: Yup.string().required("El nombre de la categoría es requerido"),
 });
 
+  // Manejo del envío del formulario
 const handleSubmit = (input) => {
-    dispatch(loadCategory(input)).then((response) => {
-        alert("Categoria creada")    
-        setTimeout(closeModalCategory(false)  , 2000);
+    dispatch(loadCategory(input))
+    .then(() => {
+        alert("Categoría creada exitosamente");
+        setTimeout(() => closeModalCategory(false), 2000);
     })
     .catch((error) => {
-        alert(error, "error")    
-        console.log(error.response, "response")  
+        const errorMessage =
+        error.response?.data?.message || "Ocurrió un error inesperado";
+        alert(errorMessage);
+        console.error("Error al crear la categoría:", error);
     });
 };
 
-return(
-    <div className={style.backgroundModal}>
-        <Formik
-            enableReinitialize
+    return (
+        <div className={style.backgroundModal}>
+            <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
-        >
-        {(formik) => {
-            const { values, handleChange, errors, touched } = formik;
-            return (
+            >
+            {(formik) => {
+                const { values, handleChange, errors, touched } = formik;
+                return (
                 <Form className={style.contenedorModal}>
                     <div className={style.contenedorBttnClose}>
-                        <button className={style.bttnClose} onClick={() => closeModalCategory(false)}> X </button>
+                    <button
+                        type="button"
+                        className={style.bttnClose}
+                        onClick={() => closeModalCategory(false)}
+                    >
+                        X
+                    </button>
                     </div>
                     <div className={style.titulo}>
-                        <span>Nueva categoria</span>
+                    <span>Nueva Categoría</span>
                     </div>
                     <div className={style.bodyM}>
-                        <div className={style.seccionM}>
-                            <label> Nombre de la categoria   </label>
-                            <input
-                                type = "text"
-                                placeholder= "Nombre de la categoria"
-                                name = "categoty_name"
-                                value={values.categoty_name}
-                                onChange={handleChange}
-                            />
-                        </div>
+                    <div className={style.seccionM}>
+                        <label htmlFor="category_name">Nombre de la categoría</label>
+                        <input
+                        id="category_name"
+                        type="text"
+                        placeholder="Nombre de la categoría"
+                        name="category_name"
+                        value={values.category_name}
+                        onChange={handleChange}
+                        />
+                        <ErrorMessage
+                        name="category_name"
+                        component="div"
+                        className={style.errorMessage}
+                        />
+                    </div>
                     </div>
                     <div className={style.footer}>
-                        <button type="submit" className={style.bttn}>Añadir categoria</button>
+                    <button type="submit" className={style.bttn}>
+                        Añadir Categoría
+                    </button>
                     </div>
                 </Form>
-            );
-        }}
-        </Formik>
-    </div>
-)} 
+                );
+            }}
+            </Formik>
+        </div>
+    );
+}
 
 export default Category;
