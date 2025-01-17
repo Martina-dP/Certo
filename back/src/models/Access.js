@@ -2,11 +2,6 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define('Access', {
-      roleId:{ 
-        type : DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-      },
       superAdmin: {
         type : DataTypes.BOOLEAN,
         defaultValue: false,

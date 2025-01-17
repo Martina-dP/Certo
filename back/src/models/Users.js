@@ -31,11 +31,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: true,
       },
-      role:{
-        type : DataTypes.ENUM("superAdmin", "admin", "employer"),
+      role: {
+        type: DataTypes.ENUM("superAdmin", "admin", "employer"),
         allowNull: false,
-      },
-      
+    }
   });
 };
 
