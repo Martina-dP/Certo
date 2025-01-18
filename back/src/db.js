@@ -65,17 +65,17 @@ Company.hasMany(User, {
 
 // Relaciones entre Role y Feature a través de RoleFeature
 Role.belongsToMany(Feature, {
-  through: RoleFeature,
-  foreignKey: 'roleId',
-  otherKey: 'featureId',
-  as: 'features',
+  through: 'RoleFeature', // Nombre del modelo intermedio
+  foreignKey: 'roleId', // Llave foránea en la tabla pivot
+  otherKey: 'featureId', // Llave foránea en la tabla pivot
+  as: 'features', // Alias para acceder a la relación
 });
 
 Feature.belongsToMany(Role, {
-  through: RoleFeature,
-  foreignKey: 'featureId',
-  otherKey: 'roleId',
-  as: 'roles',
+  through: 'RoleFeature', // Nombre del modelo intermedio
+  foreignKey: 'featureId', // Llave foránea en la tabla pivot
+  otherKey: 'roleId', // Llave foránea en la tabla pivot
+  as: 'roles', // Alias para acceder a la relación
 });
 
 // Relaciones entre Product, Category, Subcategory y Company

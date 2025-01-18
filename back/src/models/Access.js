@@ -22,7 +22,6 @@ module.exports = (sequelize) => {
           model: 'Features',
           key: 'id',
       },
-        allowNull: false,
     },
   },{ timestamps: false });
 };
