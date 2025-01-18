@@ -41,17 +41,20 @@ sequelize.models = Object.fromEntries(
   Object.entries(sequelize.models).map(([name, model]) => [name[0].toUpperCase() + name.slice(1), model])
 );
 
-const { Product, Category, Subcategory, Header, PaymentType, TypeOperation, Detail } = sequelize.models;
+const { User, Company } = sequelize.models;
 
 // Definir relaciones
-Product.belongsTo(Category, { foreignKey: "categoryId", targetKey: 'categoryId',})
-Product.belongsTo(Subcategory, { foreignKey: "subcategoryId", targetKey:"subcategoryId" })
+// Un usuario pertenece a una compañía
+User.belongsTo(Company, {
+  foreignKey: 'companyId', // Llave foránea en la tabla User
+  as: 'company', // Alias para acceder a la relación
+});
 
-Category.hasMany(Subcategory)
-Subcategory.belongsTo(Category, { foreignKey: "categoryId", targetKey: 'categoryId'})
-
-Header.belongsTo(TypeOperation, { foreignKey: "operation_typeID", targetKey: 'operation_typeID'})
-Header.belongsTo(PaymentType, { foreignKey: "payMethID", targetKey: 'payMethID'})
+// Una compañía puede tener muchos usuarios
+Company.hasMany(User, {
+  foreignKey: 'companyId', // Llave foránea en la tabla User
+  as: 'users', // Alias para acceder a la relación
+});
 
 module.exports = {
   ...sequelize.models, // Exportar modelos

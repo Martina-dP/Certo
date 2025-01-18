@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { User } = require("../../db");
 const bcryptjs = require("bcryptjs");
-const { generToken } = require("../utils/jwt");
+const { generToken } = require("../UTILS/jwt");
 
 const router = Router();
 
