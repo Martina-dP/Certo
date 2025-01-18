@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories, getSubCategories, createProduct } from "../../../Action/index";
+import { getCategories, getSubCategories  } from "../../../Action/index";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import style from "./product.module.css";
@@ -48,18 +48,18 @@ const validationSchema = Yup.object().shape({
     .min(0, "Debe ser mayor o igual a 0"),
 });
 
-const handleSubmit = (values, { resetForm }) => {
-    dispatch(createProduct(values))
-    .then(() => {
-        alert("Producto creado exitosamente");
-        resetForm();
-        closeModalProduct(false);
-    })
-    .catch((error) => {
-        console.error("Error al crear el producto:", error);
-        alert(error.response?.data?.message || "Ocurrió un error inesperado");
-    });
-};
+// const handleSubmit = (values, { resetForm }) => {
+//     dispatch(createProduct(values))
+//     .then(() => {
+//         alert("Producto creado exitosamente");
+//         resetForm();
+//         closeModalProduct(false);
+//     })
+//     .catch((error) => {
+//         console.error("Error al crear el producto:", error);
+//         alert(error.response?.data?.message || "Ocurrió un error inesperado");
+//     });
+// };
 
 const filteredSubCategories = subCategoryList.filter(
     (subCat) => subCat.categoryId === selectedOptionCategory
@@ -70,7 +70,7 @@ const filteredSubCategories = subCategoryList.filter(
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            // onSubmit={handleSubmit}
         >
             {({ values, handleChange }) => (
             <Form className={style.contenedorModel}>

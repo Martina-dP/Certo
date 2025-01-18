@@ -1,11 +1,70 @@
-.general{
+.general {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     background-color: white;
     box-shadow: 0 0 1.5em 0 #4f5054;
+    padding-bottom: 4em;
+    padding-top: 3em;
+    font-family: 'Quicksand', sans-serif;
 }
 
+/* Título de la sección */
+.titulo {
+    font-size: 2.4em;
+    font-weight: bold;
+    padding-bottom: 1em;
+}
+
+/* Contenedor de los enlaces de detalles */
+.detalle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5em;
+}
+
+/* Estilo de los enlaces de detalle */
+.detalle span {
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+.detalle span:hover {
+    color: #4f5054; /* Cambio de color al pasar el mouse */
+}
+
+/* Estilo de la imagen */
 .img {
     width: 16%;
     opacity: 85%;
+    margin-bottom: 2em; /* Para separar la imagen de los detalles */
+    transition: opacity 0.3s ease; /* Efecto suave para la imagen */
+}
+
+.img:hover {
+    opacity: 100%; /* Aumentar la visibilidad cuando se pase el mouse */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .general {
+        padding-top: 2em;
+        padding-bottom: 3em;
+    }
+
+    .titulo {
+        font-size: 2em;
+    }
+
+    .img {
+        width: 30%;
+    }
+
+    .detalle span {
+        font-size: 1em;
+    }
 }

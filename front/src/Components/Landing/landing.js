@@ -6,7 +6,6 @@ import Work from './work/work';
 import Vision from './vision/vision';
 import Footer from './footer/footer';
 import { Link } from 'react-router-dom';
-import Contact from './contact/contact';
 
 export function Landing() {
 
@@ -26,7 +25,6 @@ export function Landing() {
                 <About />
                 <Work />
                 <Vision />
-                <Contact />
             </div>
             <Footer />
         </div>

@@ -1,22 +1,48 @@
+/* Contenedor principal de la sección */
 .all {
     display: grid;
-    grid-template-columns: 45% 45%;
+    grid-template-columns: repeat(2, 45%);
     justify-content: space-evenly;
     align-items: center;
     padding-bottom: 6em;
+    gap: 3%; /* Agrega un espacio entre las columnas */
 }
 
+/* Título de la sección */
 .tittle {
-    font-size: 2.2em;
+    font-size: 2.4em; /* Aumenté un poco el tamaño */
     padding-bottom: .4em;
+    font-weight: bold; /* Para darle más énfasis */
 }
 
+/* Texto descriptivo */
 .text {
     width: 75%;
-    font-size: 1.1em;
+    font-size: 1.2em; /* Aumenté ligeramente el tamaño para mejorar la legibilidad */
     color: rgba(0, 0, 0, 0.642);
+    line-height: 1.6; /* Para mejorar la legibilidad */
 }
 
+/* Estilo de la imagen */
 .img {
     width: 100%;
+    height: auto; /* Mantener la proporción de la imagen */
+    object-fit: cover; /* Para cubrir el área sin distorsionar la imagen */
+}
+
+/* Estilos responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .all {
+        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+        text-align: center; /* Centrar el texto */
+    }
+
+    .tittle {
+        font-size: 2em;
+    }
+
+    .text {
+        font-size: 1.1em;
+        width: 90%; /* Ampliar el ancho del texto */
+    }
 }

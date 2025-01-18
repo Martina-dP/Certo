@@ -6,12 +6,14 @@
     box-shadow: 0 0 1.5em 0 #4f5054;
 }
 
+/* Contenedor general para centrar todo */
 .general {
     display: flex;
     justify-content: center;
     align-items: center;    
 }
 
+/* Subcontenedor para organizar título y enlaces */
 .sub {
     width: 90%;
     display: flex;
@@ -19,26 +21,48 @@
     align-items: center;
 }
 
-.s {
-    color: #4e6b74;
+/* Título de la empresa */
+.title {
+    font-size: 1.4em;
     font-weight: bold;
 }
 
-.title {
-    font-size: 1.4em;
-}
-
+/* Contenedor de los enlaces */
 .links {
     width: 60%;
     display: flex;
     justify-content: space-evenly;
 }
 
-.bttnInside {
-    background-color: #4f5054;
-    color: white;
-    border: none;
-    height: 3em;
-    width: 12em;
-    letter-spacing: 0.2em;
+/* Estilo para los enlaces de navegación */
+.s {
+    color: #4e6b74;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease; /* Efectos suaves para la interacción */
+}
+
+/* Efecto hover sobre los enlaces */
+.s:hover {
+    color: #3e5055; /* Color más oscuro al pasar el ratón */
+    transform: scale(1.1); /* Ligeramente más grande al pasar el ratón */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .sub {
+        flex-direction: column; /* Colocar los elementos en columna */
+        text-align: center;
+    }
+
+    .links {
+        width: 100%; /* Asegurar que los enlaces ocupen todo el ancho */
+        margin-top: 1em;
+        flex-direction: column;
+        gap: 1em; /* Espaciado entre los enlaces */
+    }
+
+    .title {
+        font-size: 1.2em; /* Ajustar el tamaño del título */
+    }
 }

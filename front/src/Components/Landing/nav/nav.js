@@ -12,14 +12,10 @@ const Nav = () => {
                         <span className={style.title}>DELPI Tecnología</span>
                     </div>
                     <div className={style.links}>
-                        {/* <a href="#about">Quienes somos</a>
-                        <a href="#work">Que hacemos</a>
-                        <a href="#vison">Nuestra vision</a>
-                        <a href="#contact">Contacto</a> */}
-                        <span className={style.s}>Quienes somos</span>
-                        <span className={style.s}>Que hacemos</span>
-                        <span className={style.s}>Nuestra vision</span>
-                        <span className={style.s}>Contacto</span>
+                    <Link to="#about" className={style.s}>Quienes somos</Link>
+                    <Link to="#work" className={style.s}>Que hacemos</Link>
+                    <Link to="#vision" className={style.s}>Nuestra visión</Link>
+                    <Link to="#contact" className={style.s}>Contacto</Link>
                     </div>
                 </div>
             </div>
