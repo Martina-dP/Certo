@@ -41,19 +41,103 @@ sequelize.models = Object.fromEntries(
   Object.entries(sequelize.models).map(([name, model]) => [name[0].toUpperCase() + name.slice(1), model])
 );
 
-const { User, Company } = sequelize.models;
+const {
+  User,
+  Company,
+  Role,
+  Feature,
+  RoleFeature,
+  Product,
+  Category,
+  Subcategory,
+} = sequelize.models;
 
-// Definir relaciones
-// Un usuario pertenece a una compañía
+// Relaciones entre User y Company
 User.belongsTo(Company, {
-  foreignKey: 'companyId', // Llave foránea en la tabla User
-  as: 'company', // Alias para acceder a la relación
+  foreignKey: 'companyId',
+  as: 'company',
 });
 
-// Una compañía puede tener muchos usuarios
 Company.hasMany(User, {
-  foreignKey: 'companyId', // Llave foránea en la tabla User
-  as: 'users', // Alias para acceder a la relación
+  foreignKey: 'companyId',
+  as: 'users',
+});
+
+// Relaciones entre Role y Feature a través de RoleFeature
+Role.belongsToMany(Feature, {
+  through: RoleFeature,
+  foreignKey: 'roleId',
+  otherKey: 'featureId',
+  as: 'features',
+});
+
+Feature.belongsToMany(Role, {
+  through: RoleFeature,
+  foreignKey: 'featureId',
+  otherKey: 'roleId',
+  as: 'roles',
+});
+
+// Relaciones entre Product, Category, Subcategory y Company
+Product.belongsTo(Category, {
+  foreignKey: 'categoryId',
+  as: 'category',
+});
+
+Category.hasMany(Product, {
+  foreignKey: 'categoryId',
+  as: 'products',
+});
+
+Product.belongsTo(Subcategory, {
+  foreignKey: 'subCategoryId',
+  as: 'subcategory',
+});
+
+Subcategory.hasMany(Product, {
+  foreignKey: 'subCategoryId',
+  as: 'products',
+});
+
+Category.hasMany(Subcategory, {
+  foreignKey: 'categoryId',
+  as: 'subcategories',
+});
+
+Subcategory.belongsTo(Category, {
+  foreignKey: 'categoryId',
+  as: 'category',
+});
+
+Product.belongsTo(Company, {
+  foreignKey: 'companyId',
+  as: 'company',
+});
+
+Company.hasMany(Product, {
+  foreignKey: 'companyId',
+  as: 'products',
+});
+
+// Relaciones entre Category, Subcategory y Company
+Category.belongsTo(Company, {
+  foreignKey: 'companyId',
+  as: 'company',
+});
+
+Company.hasMany(Category, {
+  foreignKey: 'companyId',
+  as: 'categories',
+});
+
+Subcategory.belongsTo(Company, {
+  foreignKey: 'companyId',
+  as: 'company',
+});
+
+Company.hasMany(Subcategory, {
+  foreignKey: 'companyId',
+  as: 'subcategories',
 });
 
 module.exports = {

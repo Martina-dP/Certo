@@ -32,12 +32,11 @@ module.exports = (sequelize) => {
             defaultValue: true,
         },
         role: {
-            type: DataTypes.ENUM("superAdmin", "admin", "employer"),
+            type: DataTypes.ENUM["superAdmin", "admin", "employer"],
             allowNull: false,
         },
         companyId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             references: {
                 model: 'Companies', // Nombre de la tabla de la base de datos
                 key: 'company_ID',

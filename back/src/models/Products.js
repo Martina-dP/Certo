@@ -8,6 +8,24 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true,
         },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        categoryId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Categories',
+                key: 'categoryId',
+            },
+        },
+        subcategoryId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Subcategories',
+                key: 'subcategoryId',
+            },
+        },
         color:{ 
             type : DataTypes.STRING,
             allowNull: false,
@@ -31,10 +49,19 @@ module.exports = (sequelize) => {
             type : DataTypes.INTEGER,
             allowNull: false,
         },
-        active:{ 
-            type : DataTypes.BOOLEAN,
+        stock: {
+            type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: true,
+        },
+        minStock: {
+            type: DataTypes.INTEGER,
+        },
+        companyId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Companies',
+                key: 'company_ID',
+            },
         },
     });
 };

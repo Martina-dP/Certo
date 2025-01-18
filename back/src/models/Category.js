@@ -17,5 +17,12 @@ module.exports = (sequelize) => {
             type : DataTypes.BOOLEAN,
             defaultValue: true,
         },
+        companyId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Companies',
+                key: 'company_ID',
+            },
+        },
     });
 };

@@ -7,9 +7,10 @@ module.exports = (sequelize) => {
             allowNull: false,
             primaryKey: true,
         },
-        description:{ 
-            type : DataTypes.STRING,
+        role: {
+            type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
         },
     });
 };

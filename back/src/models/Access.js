@@ -2,33 +2,27 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define('Access', {
-      superAdmin: {
-        type : DataTypes.BOOLEAN,
-        defaultValue: false,
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        allowNull: false,
+        autoIncrement: true,
       },
-      stock: {
-        type : DataTypes.BOOLEAN,
-        defaultValue: false,
+      permission_roleId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Roles',
+          key: 'id',
+        },
+        allowNull: false,
       },
-      cashManagment: {
-        type : DataTypes.BOOLEAN,
-        defaultValue: false,
+      permission_featureId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Features',
+          key: 'id',
       },
-      abm: {
-        type : DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      reports: {
-        type : DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      adminManagment: {
-        type : DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      quickSearch: {
-        type : DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
+        allowNull: false,
+    },
   },{ timestamps: false });
 };

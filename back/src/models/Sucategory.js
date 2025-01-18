@@ -17,5 +17,12 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: true,
         },
+        categoryId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Categories',
+                key: 'id',
+            },
+        },
     });
 };
