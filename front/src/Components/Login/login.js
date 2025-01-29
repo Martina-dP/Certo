@@ -1,59 +1,56 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../Action/index";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import style from "./login.module.css";
-// import { BiShowAlt } from 'react-icons/bi';
-// import { AiOutlineEyeInvisible } from 'react-icons/ai';
 
 function Login() {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const adminLogin = useSelector((state) => state.admin);
   console.log("USER", adminLogin);
 
-  const initialValues = ({
-      user: "",
-      password: "",
-  });
+  const initialValues = {
+    user: "",
+    password: "",
+  };
 
   const validationSchema = Yup.object().shape({
-      user: Yup.string().required("El nombre de usuario es requerido"),
-      password: Yup.string()
-                  .required("La contraseña es obligatoria")
-                  .min(6, "La contraseña debe tener al menos 6 caracteres"), // Agregado mínimo de caracteres
+    user: Yup.string().required("El nombre de usuario es requerido"),
+    password: Yup.string()
+      .required("La contraseña es obligatoria")
+      .min(6, "La contraseña debe tener al menos 6 caracteres"),
   });
 
-  const handleSubmit = (input) => {
-      dispatch(login(input))
-        .then((response) => {
-          console.log(response.payload, "response");
-          navigate("/main");
-        })
-        .catch((error) => {
-          alert(error.response.data.msg, "error");
-          console.log(error.response.data, "response");
-        });
+  const handleSubmit = async (input, { setSubmitting, setStatus }) => {
+    try {
+      const response = await dispatch(login(input)).unwrap();
+      console.log(response, "response");
+      navigate("/main");
+    } catch (error) {
+      setStatus(error?.response?.data?.msg || "Error desconocido");
+      console.error("Login error:", error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className={style.contenedor}>
       <Formik
-        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         {(formik) => {
-          const { values, handleChange, errors, touched } = formik;
+          const { values, handleChange, errors, touched, isSubmitting, status } = formik;
           return (
             <Form className={style.form}>
               <span className={style.title}>Accede a tu cuenta</span>
               <div className={style.completeC}>
-                <div>
+                <div className={style.ca}>
                   <label>Usuario:</label>
                   <input
                     type="text"
@@ -76,21 +73,21 @@ function Login() {
                     className={errors.password && touched.password ? "input-error" : ""}
                   />
                   {errors.password && touched.password && <p className="error">{errors.password}</p>}
-                  {/* <div onClick={() => setShowPass(!showPass)}>
-                      {showPass ? <AiOutlineEyeInvisible /> : <BiShowAlt  /> }
-                  </div> */}
                 </div>
+                {status && <p className="error">{status}</p>}
                 <div className={style.bttnContenedor}>
-                  <button className={style.bttn} type="submit">Entrar</button>
+                  <button className={style.bttn} type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Cargando..." : "Entrar"}
+                  </button>
                 </div>
               </div>
-              <span>Olvidé mi contraseña</span>
+              <Link>Olvidé mi contraseña</Link>
             </Form>
           );
         }}
       </Formik>
     </div>
   );
-} 
+}
 
 export default Login;

@@ -2,13 +2,13 @@
     --main-bg-color: #4f5054;
     --main-font-color: #4e6b74;
     --button-hover-bg: #3e4042;
-    --font-family: 'Quicksand', sans-serif;
+    --font-family: Helvetica, Arial, sans-serif;
 }
 
 /* Estilo general para el fondo y tipografía */
 .total {
     font-family: var(--font-family);
-    background-image: url("../Media/fondoPapel.png");
+    background-color: rgba(158, 155, 155, 0.845);
 }
 
 /* Estilo para la cabecera, centrando el contenido */

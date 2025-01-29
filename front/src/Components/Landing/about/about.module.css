@@ -5,6 +5,7 @@
     justify-content: space-evenly;
     align-items: center;
     padding-bottom: 6em;
+    color: white;
     gap: 3%; /* Agrega un espacio entre las columnas */
 }
 
@@ -19,7 +20,7 @@
 .text {
     width: 75%;
     font-size: 1.2em; /* Aumenté ligeramente el tamaño para mejorar la legibilidad */
-    color: rgba(0, 0, 0, 0.642);
+    /* color: rgba(0, 0, 0, 0.642); */
     line-height: 1.6; /* Para mejorar la legibilidad */
 }
 

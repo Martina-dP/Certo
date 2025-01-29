@@ -5,6 +5,7 @@
     align-items: center;
     padding-bottom: 6em;
     gap: 3em; /* Añadí un espacio entre las columnas */
+    color: white;
 }
 
 /* Estilo para el título */
@@ -18,7 +19,6 @@
 /* Estilo para el texto */
 .text {
     font-size: 1.2em; /* Aumenté un poco el tamaño para mejorar la legibilidad */
-    color: rgba(0, 0, 0, 0.642);
     width: 90%;
     margin: auto;
     line-height: 1.6; /* Mejorar la legibilidad con un mayor espacio entre líneas */

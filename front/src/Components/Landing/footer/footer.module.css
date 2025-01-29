@@ -1,12 +1,9 @@
 .general {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     background-color: white;
     box-shadow: 0 0 1.5em 0 #4f5054;
-    padding-bottom: 4em;
-    padding-top: 3em;
     font-family: 'Quicksand', sans-serif;
 }
 
@@ -14,15 +11,13 @@
 .titulo {
     font-size: 2.4em;
     font-weight: bold;
-    padding-bottom: 1em;
 }
 
 /* Contenedor de los enlaces de detalles */
 .detalle {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 1.5em;
+    align-items: start;
 }
 
 /* Estilo de los enlaces de detalle */
