@@ -13,13 +13,13 @@ export function Landing() {
         <div className = {style.total}>
             <Nav />
             <div className = {style.fuera}>
-              <div className = {style.cabeza}>
+              <div className = {style.cabeza} id='home'>
                 <span className = {style.titulo}>Estamos para ayudarte en tu administración</span>
                 <span className = {style.subTitulo}>Domina tu inventario, impulsa tus ventas: Tu aliado en la gestión empresarial.</span>
                 <div className = {style.bttnP}>
-                <Link to="/logIn">
-                  <button className = {style.bttnInside}>Inicio sesion</button>
-                </Link>
+                  <Link to="/logIn">
+                    <button className = {style.bttnInside}>Inicio sesion</button>
+                  </Link>
                 </div>
               </div>
                 <About />

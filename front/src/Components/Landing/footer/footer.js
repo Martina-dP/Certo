@@ -5,7 +5,7 @@ import img1 from "../../Media/3.png"
 export function Footer() {
 
     return(
-        <div className={style.general}>
+        <div className={style.general} id='contact'>
             <div className = {style.detalle}>
                 <p>tel : +34600142049</p>
                 <p>email : delpiTecnologia@info.com</p>

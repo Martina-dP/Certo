@@ -4,7 +4,7 @@ import style from './work.module.css'
 
 const Work = () => {
     return (
-        <div className = {style.all} id='about'>
+        <div className = {style.all} id='work'>
             <div className = {style.dos}>
                 <img className={style.img} src={img1} alt=" img not found"/>
             </div>

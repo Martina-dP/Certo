@@ -3,7 +3,7 @@ import style from './vision.module.css'
 
 const Vison = () => {
     return (
-        <div className = {style.all} id='about'>
+        <div className = {style.all} id='vision'>
             <div className = {style.titulo}>
                 <span> Nuestra vision</span>
             </div>
