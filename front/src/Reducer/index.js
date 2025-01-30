@@ -10,13 +10,17 @@ import {
     NEW_PROVIDER 
 } from "../Action/index";
 
+// Obtener el token guardado en localStorage al cargar la app
+const storedToken = localStorage.getItem("token");
+
 const initialState = {
     admin: {},
     allAdmins: [],
     user: {},
     allUsers: {},
     newUser: {},
-    loginUser: {},
+    loginUser: storedToken ? { token: storedToken } : {}, // Mantener sesión activa
+    isAuthenticated: !!storedToken, // Definir si está autenticado
     newProduct: {},
     categories: [],
     newCategory: {},
@@ -39,16 +43,12 @@ function rootReducer(state = initialState, { type, payload }) {
                 newUser: payload,
             };
         case LOGIN:
-            const { user, password, token, id, validate } = payload;
+            const { user, token, id } = payload;
+            localStorage.setItem("token", token);
             return {
                 ...state,
-                loginUser: {
-                    user,
-                    password,
-                    token,
-                    id,
-                    validate
-                },
+                loginUser: { user, token, id },
+                isAuthenticated: true,
             };
         // PRODUCTS
         case NEW_PRODUCT:

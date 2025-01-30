@@ -38,15 +38,28 @@ export function createAccount (input) {
 }
 
     // OTROS
-export function login (input) {
-    return async function(dispatch){
-        var json = await axios.post(`http://localhost:3001/logIn`, input)
-        return dispatch({
-            type : "LOGIN",
-            payload : json.data
-        })
+export function login(input) {
+    return async function (dispatch) {
+        try {
+        const response = await axios.post(`http://localhost:3001/logIn`, input);
+    
+        const { token, user, role } = response.data; // Extraer token y datos del usuario
+    
+        // Guardar el token en localStorage para persistencia
+        localStorage.setItem("token", token);
+    
+        dispatch({
+            type: "LOGIN",
+            payload: { user, role, token },
+        });
+    
+        return response.data; // Retornar datos para manejar la navegación
+        } catch (error) {
+        console.error("Error en login:", error);
+        throw error; // Lanzar error para manejarlo en el componente Login
+        }
+    };
     }
-}
 
 export function getCategories () {
     return async function(dispatch){
