@@ -28,7 +28,6 @@ router.post("/create-superadmin", isSuperAdmin, async (req, res) => {
             role: 'superAdmin',
             active: true,
         });
-
         res.status(201).json({
             message: "SuperAdmin creado exitosamente.",
             user: {
