@@ -19,8 +19,9 @@ const initialState = {
     user: {},
     allUsers: {},
     newUser: {},
-    loginUser: storedToken ? { token: storedToken } : {}, // Mantener sesión activa
-    isAuthenticated: !!storedToken, // Definir si está autenticado
+    loginUser: JSON.parse(localStorage.getItem("user")) || {},
+    token: localStorage.getItem("token") || "",
+    isAuthenticated: !!localStorage.getItem("token"),
     newProduct: {},
     categories: [],
     newCategory: {},
@@ -45,6 +46,7 @@ function rootReducer(state = initialState, { type, payload }) {
         case LOGIN:
             const { user, token, id } = payload;
             localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify({ user, id }));
             return {
                 ...state,
                 loginUser: { user, token, id },

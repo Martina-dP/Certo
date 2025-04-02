@@ -56,6 +56,7 @@ export function login(input) {
         return response.data; // Retornar datos para manejar la navegación
         } catch (error) {
         console.error("Error en login:", error);
+        console.error("Login error:", error.response || error);
         throw error; // Lanzar error para manejarlo en el componente Login
         }
     };

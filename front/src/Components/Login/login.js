@@ -26,7 +26,7 @@ function Login() {
 
   const handleSubmit = async (input, { setSubmitting, setStatus }) => {
     try {
-      const response = await dispatch(login(input)).unwrap();
+      const response = await dispatch(login(input));
       console.log(response, "response");
       navigate("/main");
     } catch (error) {
