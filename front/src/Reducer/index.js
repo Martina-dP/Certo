@@ -10,9 +10,6 @@ import {
     NEW_PROVIDER 
 } from "../Action/index";
 
-// Obtener el token guardado en localStorage al cargar la app
-const storedToken = localStorage.getItem("token");
-
 const initialState = {
     admin: {},
     allAdmins: [],
