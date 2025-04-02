@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const bcryptjs = require("bcryptjs");
 const { User } = require("../../db");
-const { isSuperAdmin, isAdminOrSuperAdmin } = require("../UTILS/role_authentication");
+const { isAdminOrSuperAdmin } = require("../UTILS/role_authentication");
 
 const router = Router();
 
