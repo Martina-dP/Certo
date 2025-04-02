@@ -1,0 +1,100 @@
+/* Contenedor principal */
+.contenedor {
+    height: 100vh;
+    background-color: rgba(158, 155, 155, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Formulario */
+.form {
+    box-shadow: 0 0 1.5em 0 #4f5054;
+    max-width: 450px; 
+    width: 90%;
+    height: auto;
+    display: grid;
+    gap: 2em;
+    padding: 2em;
+    background-color: white;
+    background-image: url("../Media/3.png");
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: right top;
+    border-radius: 10px;
+    font-family: "Helvetica";
+}
+
+/* Sección de inputs */
+.completeC {
+    display: grid;
+    padding: 1.5em;
+    border-radius: 8px;
+}
+
+.ca{
+    margin-bottom: 1em;
+}
+
+
+/* Input styling */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: "Helvetica";
+}
+
+/* Botón de envío */
+.bttnContenedor {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.8em;
+}
+
+.bttn {
+    background-color: #606060;
+    color: white;
+    border: none;
+    height: 3em;
+    width: 12em;
+    letter-spacing: 0.1em;
+    font-size: 1em;
+    font-family: "Helvetica";
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.bttn:hover {
+    background-color: #444444;
+}
+
+/* Título */
+.title {
+    font-size: 1.8em;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos para errores */
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 600px) {
+    .form {
+        width: 95%;
+        background-size: 50%;
+    }
+
+    .bttn {
+        width: 100%;
+    }
+}

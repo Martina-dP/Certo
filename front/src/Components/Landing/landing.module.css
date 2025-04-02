@@ -1,0 +1,87 @@
+:root {
+    --main-bg-color: #4f5054;
+    --main-font-color: #4e6b74;
+    --button-hover-bg: #3e4042;
+    --font-family: Helvetica, Arial, sans-serif;
+}
+
+/* Estilo general para el fondo y tipografía */
+.total {
+    font-family: var(--font-family);
+    background-color: rgba(158, 155, 155, 0.845);
+}
+
+/* Estilo para la cabecera, centrando el contenido */
+.cabeza {
+    height: 100vh;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    color: var(--main-font-color);
+    font-family: var(--font-family);
+}
+
+/* Título principal */
+.titulo {
+    font-size: 2.8em;
+    padding-bottom: .4em;
+}
+
+/* Subtítulo */
+.subTitulo {
+    display: flex;
+    justify-content: center;
+    font-size: 1.4em;
+}
+
+/* Contenedor general para el contenido */
+.fuera {
+    width: 80%;
+    margin: auto;
+}
+
+/* Estilo para los botones y su alineación */
+.bttnP {
+    display: flex;
+    justify-content: center;
+    margin-top: 4em;
+}
+
+/* Estilo del botón principal */
+.bttnInside {
+    background-color: var(--main-bg-color);
+    color: white;
+    border: none;
+    height: 3em;
+    width: 12em;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Efecto suave para el hover */
+}
+
+/* Efecto hover para el botón */
+.bttnInside:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Estilo para los títulos secundarios */
+.tituloP {
+    display: flex;
+    justify-content: center;
+    font-size: 2.6em;
+    padding-bottom: .4em;
+}
+
+/* Asegurar que los elementos dentro de la página se ajusten bien en pantallas pequeñas */
+@media (max-width: 768px) {
+    .titulo {
+        font-size: 2.2em;
+    }
+    .subTitulo {
+        font-size: 1.2em;
+    }
+    .bttnInside {
+        width: 10em;
+        height: 2.6em;
+    }
+}
