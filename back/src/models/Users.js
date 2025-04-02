@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
         companyId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Companies', // Nombre de la tabla de la base de datos
+                model: 'Companies', 
                 key: 'company_ID',
             },
         }

@@ -13,7 +13,7 @@ function App() {
           <Route path="/" element= {<Landing/>} />
           <Route path="/logIn" element={<Login />} />
           <Route path="/main" element={<ProtectedRoute element={<Home />} />} />
-          <Route path="/main/newAccount" element={<ProtectedRoute element= {<SingUp/>}/>} />
+          <Route path="/newAccount" element={<ProtectedRoute element= {<SingUp/>}/>} />
         </Routes>
     </BrowserRouter>
   );

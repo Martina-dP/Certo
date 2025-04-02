@@ -77,7 +77,7 @@ router.post("/", isAdminOrSuperAdmin, async (req, res) => {
             user,
             password: passwordHash,
             active,
-            role, // El rol puede ser 'admin' o 'employer'
+            role, 
         });
 
         res.status(201).json({

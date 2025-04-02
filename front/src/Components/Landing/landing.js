@@ -21,6 +21,11 @@ export function Landing() {
                     <button className = {style.bttnInside}>Inicio sesion</button>
                   </Link>
                 </div>
+                <div className = {style.bttnP}>
+                  <Link to="/newAccount">
+                    <button className = {style.bttnInside}>Crear cuenta</button>
+                  </Link>
+                </div>
               </div>
                 <About />
                 <Work />

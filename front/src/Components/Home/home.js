@@ -1,77 +1,85 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import NavHome from "./nav/navH";
 import Product from "../Altas/Products/Products";
 import Provider from "../Altas/Provides/Provider";
 import NewClient from "../Altas/NewClient/NewClient";
 import Category from "../Altas/Category/NewCategoty";
 import NewSubCategory from "../Altas/NewSubCategory/NewSubCategory";
-import style from "./home.module.css"
 import Bank from "../Altas/Bank/Bank";
-import PreBill from "../CashMovement/PreBill/PreBill"
+import PreBill from "../CashMovement/PreBill/PreBill";
+import style from "./home.module.css";
 
 function Home() {
+  const [modals, setModals] = useState({
+    optionsAlta: false,
+    optionsCashMove: false,
+    openPreBill: false,
+    openModelProvider: false,
+    openModelProduct: false,
+    openModelClient: false,
+    openModelCategory: false,
+    openModelSubCategory: false,
+    openModelBank: false,
+  });
 
-  const [optionsAlta, setOptionsAlta] = useState(false)
-  const [openModelProduct, setOpenModelProduct] = useState(false)
-  const [openModelProvider, setOpenModelProvider] = useState(false)
-  const [openModelClient, setOpenModelClient] = useState(false)
-  const [openModelCategory, setOpenModelCategory] = useState(false)
-  const [openModelSubCategory, setOpenModelSubCategory] = useState(false)
-  const [openModelBank, setOpenModelBank] = useState(false)
+  const toggleModal = (modal) => {
+    setModals((prev) => ({ ...prev, [modal]: !prev[modal] }));
+  };
 
-  const [optionsCashMove, setOptionsCashMove] = useState(false)
-  const [openPreBill, setOpenPreBill] = useState(false)
-
-  return(
-      <div className={style.subTotal}>
-        <div className={style.contenedor}>
+  return (
+    <div className={style.subTotal}>
+      <div className={style.contenedor}>
         <NavHome />
         <div className={style.c}>
           <div className={style.parteUno}>
-            <div>
-              <button className={style.bttn}>Stock</button>
-            </div>
-            <div>
-              <button onClick={() => setOptionsCashMove(!optionsCashMove)} className={style.bttn}>Movimineto de caja</button>
-              {optionsCashMove === true ?(
+            <button className={style.bttn}>Stock</button>
+
+            {/* Movimiento de caja */}
+            <button onClick={() => toggleModal("optionsCashMove")} className={style.bttn}>
+              Movimiento de caja
+            </button>
+            {modals.optionsCashMove && (
               <div className={style.optionsCashMove}>
-                <button className={style.bttnALt} onClick={() => setOpenPreBill(true)}>Nueva factura</button>
-                {openPreBill && <PreBill closeModalPreBill={setOpenPreBill} />}
+                <button className={style.bttnALt} onClick={() => toggleModal("openPreBill")}>
+                  Nueva factura
+                </button>
+                {modals.openPreBill && <PreBill closeModalPreBill={() => toggleModal("openPreBill")} />}
               </div>
-              ): ""}
-            </div>
-            <div>
-              <button onClick={() => setOptionsAlta(!optionsAlta)} className={style.bttn}>Altas</button>
-              {optionsAlta === true ?(
+            )}
+
+            {/* Altas */}
+            <button onClick={() => toggleModal("optionsAlta")} className={style.bttn}>
+              Altas
+            </button>
+            {modals.optionsAlta && (
               <div className={style.optionsAlta}>
-                <button className={style.bttnALt} onClick={() => setOpenModelProvider(true)}>Nuevo proveedor</button>
-                {openModelProvider && <Provider closeModalProvider={setOpenModelProvider} />}
-                <button className={style.bttnALt} onClick={() => setOpenModelProduct(true)}>Nuevo producto</button>
-                {openModelProduct && <Product closeModalProduct={setOpenModelProduct} />}
-                <button className={style.bttnALt} onClick={() => setOpenModelClient(true)}>Nuevo cliente</button>
-                {openModelClient && <NewClient closeModalClient={setOpenModelClient} />}
-                <button className={style.bttnALt} onClick={() => setOpenModelCategory(true)}>Cargar categorias</button>
-                {openModelCategory && <Category closeModalCategory={setOpenModelCategory} />}
-                <button className={style.bttnALt} onClick={() => setOpenModelSubCategory(true)}>Cargar subcategoria</button>
-                {openModelSubCategory && <NewSubCategory closeModalSubategory={setOpenModelSubCategory} />}
-                <button className={style.bttnALt}  onClick={() => setOpenModelBank(true)}>Cargar Bancos</button>
-                {openModelBank && <Bank closeModalBank={setOpenModelBank} />}
+                {[
+                  { label: "Nuevo proveedor", key: "openModelProvider", Component: Provider },
+                  { label: "Nuevo producto", key: "openModelProduct", Component: Product },
+                  { label: "Nuevo cliente", key: "openModelClient", Component: NewClient },
+                  { label: "Cargar categorías", key: "openModelCategory", Component: Category },
+                  { label: "Cargar subcategoría", key: "openModelSubCategory", Component: NewSubCategory },
+                  { label: "Cargar bancos", key: "openModelBank", Component: Bank },
+                ].map(({ label, key, Component }) => (
+                  <div key={key}>
+                    <button className={style.bttnALt} onClick={() => toggleModal(key)}>
+                      {label}
+                    </button>
+                    {modals[key] && <Component closeModal={() => toggleModal(key)} />}
+                  </div>
+                ))}
               </div>
-              ): ""}
-            </div>
-            <div>
-              <button className={style.bttn}>Gestion administrativa</button>
-            </div>
-            <div>
-              <button className={style.bttn}>Reportes</button>
-            </div>
-            <div>
-              <button className={style.bttn}>Super Administrador</button>
-            </div>
+            )}
+
+            <button className={style.bttn}>Gestión administrativa</button>
+            <button className={style.bttn}>Reportes</button>
+            <button className={style.bttn}>Super Administrador</button>
           </div>
+
+          {/* Busquedas rápidas */}
           <div className={style.contenedor2}>
-            <button className={style.bttnL}>Busquedas rapidas</button>
-            <div  className={style.parteDos}>
+            <button className={style.bttnL}>Búsquedas rápidas</button>
+            <div className={style.parteDos}>
               <button className={style.bttn}>Consultar precio</button>
               <button className={style.bttn}>Consultar existencia</button>
             </div>
@@ -79,6 +87,7 @@ function Home() {
         </div>
       </div>
     </div>
-  )} 
+  );
+}
 
 export default Home;
