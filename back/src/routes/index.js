@@ -5,6 +5,7 @@ const adminGet = require("./GET/Admin/admin")
 
     // User
 const userPost = require("./POST/account")
+const superUserPost = require("./POST/superAdminAccount");
 
     // Otros
 const login = require("./LOGIN/login")
@@ -28,6 +29,7 @@ router.use('/admins', adminGet);
 
     // User
 router.use('/createUser', userPost);
+router.use('/', superUserPost);
 
     // Otros
 router.use('/logIn', login);
