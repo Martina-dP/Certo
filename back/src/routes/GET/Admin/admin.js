@@ -10,7 +10,6 @@ router.get("/", async (_req, res) => {
     } catch (error) {
         console.error(error);
     }
-  });
-
+});
 
 module.exports = router;
