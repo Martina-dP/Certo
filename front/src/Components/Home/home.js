@@ -65,7 +65,7 @@ function Home() {
                     <button className={style.bttnALt} onClick={() => toggleModal(key)}>
                       {label}
                     </button>
-                    {modals[key] && <Component closeModal={() => toggleModal(key)} />}
+                    {modals[key] && <Component closeModal ={() => toggleModal(key)} />}
                   </div>
                 ))}
               </div>

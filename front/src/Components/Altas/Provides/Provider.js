@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { loadProvider } from "../../../Action/index";
 import style from "./provider.module.css";
 
-function Provider({ closeModalProvider }) {
+function Provider({ closeModal }) {
 const dispatch = useDispatch();
 
 const initialValues = {
@@ -39,7 +39,7 @@ const handleSubmit = (values, { resetForm }) => {
     .then(() => {
         alert("Proveedor creado exitosamente");
         resetForm();
-        closeModalProvider(false);
+        closeModal(false);
     })
     .catch((error) => {
         console.error("Error al crear el proveedor:", error);
@@ -60,7 +60,7 @@ const handleSubmit = (values, { resetForm }) => {
                 <button
                     type="button"
                     className={style.bttnClose}
-                    onClick={() => closeModalProvider(false)}
+                    onClick={() => closeModal(false)}
                 >
                     X
                 </button>

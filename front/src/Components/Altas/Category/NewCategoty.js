@@ -5,25 +5,22 @@ import * as Yup from "yup";
 import { loadCategory } from "../../../Action/index";
 import style from "./category.module.css";
 
-function Category({ closeModalCategory }) {
+function Category({ closeModal }) {
 const dispatch = useDispatch();
 
-  // Valores iniciales del formulario
 const initialValues = {
     category_name: "",
 };
 
-  // Esquema de validación
 const validationSchema = Yup.object().shape({
     category_name: Yup.string().required("El nombre de la categoría es requerido"),
 });
 
-  // Manejo del envío del formulario
 const handleSubmit = (input) => {
     dispatch(loadCategory(input))
     .then(() => {
         alert("Categoría creada exitosamente");
-        setTimeout(() => closeModalCategory(false), 2000);
+        setTimeout(() => closeModal(false), 2000);
     })
     .catch((error) => {
         const errorMessage =
@@ -48,7 +45,7 @@ const handleSubmit = (input) => {
                     <button
                         type="button"
                         className={style.bttnClose}
-                        onClick={() => closeModalCategory(false)}
+                        onClick={() => closeModal(false)}
                     >
                         X
                     </button>

@@ -5,7 +5,7 @@ import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import style from "./product.module.css";
 
-function Product({ closeModalProduct }) {
+function Product({ closeModal }) {
 const [selectedOptionCategory, setSelectedOptionCategory] = useState("");
 
 const dispatch = useDispatch();
@@ -53,7 +53,7 @@ const validationSchema = Yup.object().shape({
 //     .then(() => {
 //         alert("Producto creado exitosamente");
 //         resetForm();
-//         closeModalProduct(false);
+//         closeModal(false);
 //     })
 //     .catch((error) => {
 //         console.error("Error al crear el producto:", error);
@@ -78,7 +78,7 @@ const filteredSubCategories = subCategoryList.filter(
                 <button
                     type="button"
                     className={style.bttnClose}
-                    onClick={() => closeModalProduct(false)}
+                    onClick={() => closeModal(false)}
                 >
                     X
                 </button>

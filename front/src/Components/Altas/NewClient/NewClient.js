@@ -5,7 +5,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import style from "./newClient.module.css"
 
-function NewClient({closeModalClient}) {
+function NewClient({closeModal}) {
 
 const navigate = useNavigate();
 const dispatch = useDispatch();
@@ -49,7 +49,7 @@ return(
             return (
                 <Form className={style.contenedorModal}>
                     <div className={style.contenedorBttnClose}>
-                        <button className={style.bttnClose} onClick={() => closeModalClient(false)}> X </button>
+                        <button className={style.bttnClose} onClick={() => closeModal(false)}> X </button>
                     </div>
                     <div className={style.titulo}>
                         <span>Alta cliente</span>

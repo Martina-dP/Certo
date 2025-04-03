@@ -5,7 +5,7 @@ import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import style from "./subCategory.module.css";
 
-function NewSubCategory({ closeModalSubategory }) {
+function NewSubCategory({ closeModal }) {
 const dispatch = useDispatch();
 
 useEffect(() => {
@@ -31,7 +31,7 @@ const handleSubmit = (input, { resetForm }) => {
     dispatch(loadSubCategory(input))
     .then(() => {
         alert("Subcategoría creada exitosamente");
-        setTimeout(() => closeModalSubategory(false), 2000);
+        setTimeout(() => closeModal(false), 2000);
         resetForm();
     })
     .catch((error) => {
@@ -55,7 +55,7 @@ const handleSubmit = (input, { resetForm }) => {
                         <button
                         type="button"
                         className={style.bttnClose}
-                        onClick={() => closeModalSubategory(false)}
+                        onClick={() => closeModal(false)}
                         >
                             X
                         </button>
