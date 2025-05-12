@@ -4,6 +4,26 @@
   padding: 0;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
-  height: 100vh;
+  background-color: var(--color-warm-light);
+}
+
+
+:root {
+  --color-white: #FFFFFF;
+  --color-base: #4E6B74;
+  --color-soft: #8FAEB5;
+  --color-soft-rgb: 143, 174, 181;
+  --color-dark: #2C3E42;
+  --color-accent: #A0D6CF;
+  --color-warm-light: #F2EDE4;
+
+  --font-title: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --border-radius: 6px;
 }
