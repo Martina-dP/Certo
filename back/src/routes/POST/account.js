@@ -2,11 +2,12 @@ const { Router } = require("express");
 const bcryptjs = require("bcryptjs");
 const { User } = require("../../db");
 const { isAdminOrSuperAdmin } = require("../UTILS/role_authentication");
+const {authenticate} = require("../UTILS/jwt")
 
 const router = Router();
 
 // Ruta para crear admin o empleado (tanto superAdmin como admin pueden crear admin y empleado)
-router.post("/", isAdminOrSuperAdmin, async (req, res) => {
+router.post("/", authenticate, isAdminOrSuperAdmin, async (req, res) => {
     const { name, lastName, user, password, active = true, role } = req.body;
 
     // Validación básica

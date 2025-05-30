@@ -29,7 +29,15 @@ export function getAdmins () {
 
 export function createAccount (input) {
     return async function(dispatch){
-        var json = await axios.post("http://localhost:3001/createUser", input)
+        const token = localStorage.getItem("token"); // Recuperar el token del localStorage
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`, // 👈 Añadir el token aquí
+            }
+        };
+
+        var json = await axios.post("http://localhost:3001/createUser", input, config)
         return dispatch({
             type : "POST_USER",
             payload : json.data

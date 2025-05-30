@@ -55,7 +55,14 @@ router.post("/", async (req, res) => {
       msg: "Sesión iniciada correctamente",
     });
   } catch (error) {
-    console.error("Error en el login:", error);
+    console.error("Error en el login:", res.json({
+      ok: true,
+      id: userDetails.id,
+      user: userDetails.user,
+      role: userDetails.role,
+      token,
+      msg: "Sesión iniciada correctamente",
+    }));
     return res.status(500).json({
       ok: false,
       msg: "Error interno del servidor",

@@ -8,6 +8,7 @@ import NewSubCategory from "../Altas/NewSubCategory/NewSubCategory";
 import Bank from "../Altas/Bank/Bank";
 import PreBill from "../CashMovement/PreBill/PreBill";
 import SingUp from '../Admin/newAccount/newAccount'
+import ValidateRolUser from '../../Utils/ValidateUserRol'
 
 import style from "./home.module.css";
 
@@ -66,6 +67,9 @@ function Home() {
   const toggleModal = (modal) => {
     setModals((prev) => ({ ...prev, [modal]: !prev[modal] }));
   };
+
+  const currentUser = ValidateRolUser();
+  console.log(currentUser)
 
   return (
     <div className={style.home_container}>
