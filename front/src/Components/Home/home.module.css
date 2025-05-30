@@ -37,7 +37,10 @@
 }
 
 .cashMoveOptions,
-.altaOptions {
+.altaOptions,
+.stockOptions,
+.reportOptions,
+.superAdminOptions {
     position: absolute;
     top: 100%;
     left: 0;

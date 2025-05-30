@@ -65,6 +65,7 @@ export function login(input) {
 export function getCategories () {
     return async function(dispatch){
         var json = await axios.get("http://localhost:3001/categories")
+        console.log(json, "json action")
         return dispatch({
             type : "GET_CATEGORY",
             payload : json.data

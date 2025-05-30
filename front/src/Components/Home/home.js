@@ -7,10 +7,13 @@ import Category from "../Altas/Category/NewCategoty";
 import NewSubCategory from "../Altas/NewSubCategory/NewSubCategory";
 import Bank from "../Altas/Bank/Bank";
 import PreBill from "../CashMovement/PreBill/PreBill";
+import SingUp from '../Admin/newAccount/newAccount'
+
 import style from "./home.module.css";
 
 function Home() {
   const [modals, setModals] = useState({
+    optionsStock: false,
     optionsAlta: false,
     optionsCashMove: false,
     openPreBill: false,
@@ -46,6 +49,20 @@ function Home() {
     { label: "Cargar bancos", key: "openModelBank", Component: Bank },
   ];
 
+  const reportOptions = [
+    { label: "Consulta de cheques emitidos", key: "chequesEmitidos" },
+    { label: "Emitidos por banco", key: "emitidosBanco" },
+    { label: "Emitidos por destinatario", key: "emitidosDestinatario" },
+    { label: "Consulta vigente", key: "consultaVigente" },
+    { label: "Ventas por año y mes", key: "ventasAnioMes" },
+    { label: "Ventas por cliente", key: "ventasCliente" },
+  ];
+
+  const superAdminOptions = [
+    { label: "Crear cuenta", key: "crearCuenta", Component: SingUp},
+    { label: "Eliminar cuenta", key: "eliminarCuenta" },
+  ];
+
   const toggleModal = (modal) => {
     setModals((prev) => ({ ...prev, [modal]: !prev[modal] }));
   };
@@ -56,7 +73,16 @@ function Home() {
         <div className={style.home_body}>
           <div className={style.home_accions}>
             <div className={style.dropdownContainer}>
-              <button className={style.home_accions_bttns}>Stock</button>
+            <button onClick={() => toggleModal("optionsStock")} className={style.home_accions_bttns}>
+              Stock
+            </button>
+            {modals.optionsStock && (
+              <div className={style.stockOptions}> 
+                <button className={style.optionsBttns}>Existencias</button>
+                <button className={style.optionsBttns}>Existencias en cero</button>
+                <button className={style.optionsBttns}>Debajo del mínimo</button>
+              </div>
+            )}
             </div>
 
             {/* Movimiento de caja */}
@@ -71,7 +97,9 @@ function Home() {
                       <button className={style.optionsBttns} onClick={() => toggleModal(key)}>
                         {label}
                       </button>
-                      {Component && modals[key] && <Component closeModal={() => toggleModal(key)} />}
+                      {Component && modals[key] && (
+                        <Component closeModalPreBill={() => toggleModal(key)} />
+                      )}
                     </div>
                   ))}
                 </div>
@@ -102,11 +130,36 @@ function Home() {
             </div>
 
             <div className={style.dropdownContainer}>
-              <button className={style.home_accions_bttns}>Reportes</button>
+              <button onClick={() => toggleModal("optionsReportes")} className={style.home_accions_bttns}>
+                Reportes
+              </button>
+              {modals.optionsReportes && (
+                <div className={style.reportOptions}>
+                  {reportOptions.map(({ label, key }) => (
+                    <button key={key} className={style.optionsBttns} onClick={() => toggleModal(key)}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className={style.dropdownContainer}>
-              <button className={style.home_accions_bttns}>Super Administrador</button>
+              <button onClick={() => toggleModal("superAdmin")} className={style.home_accions_bttns}>
+                Administrador
+              </button>
+              {modals.superAdmin && (
+                <div className={style.superAdminOptions}>
+                  {superAdminOptions.map(({ label, key, Component }) => (
+                    <div key={key}>
+                      <button className={style.optionsBttns} onClick={() => toggleModal(key)}>
+                        {label}
+                      </button>
+                      {modals[key] && <Component closeModal={() => toggleModal(key)} />}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -119,15 +172,6 @@ function Home() {
               </div>
               <div className={style.quick_search_bttn}>
               <button className={style.bttn}> Consultar existencia</button>
-              {modals.superAdmin && (
-                <div>
-                  <ul>
-                    <li>Dar alta Admin</li>
-                    <li>Dar alta Empleados</li>
-                    <li>Eliminar cuenta</li>
-                  </ul>
-                </div>
-              )}
               </div>
             </div>
           </div>

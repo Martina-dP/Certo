@@ -14,19 +14,17 @@ useEffect(() => {
 
 const categoryList = useSelector((state) => state.categories);
 
-  // Valores iniciales del formulario
+
 const initialValues = {
     sub_category_name: "",
     categoryId: "",
 };
 
-  // Esquema de validación
 const validationSchema = Yup.object().shape({
     sub_category_name: Yup.string().required("El nombre de la subcategoría es requerido"),
     categoryId: Yup.string().required("Debe seleccionar una categoría"),
 });
 
-  // Manejo del envío del formulario
 const handleSubmit = (input, { resetForm }) => {
     dispatch(loadSubCategory(input))
     .then(() => {
@@ -43,29 +41,28 @@ const handleSubmit = (input, { resetForm }) => {
 };
 
     return (
-        <div className={style.backgroundModal}>
+        <div className={style.container_subcategory}>
             <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
             >
                 {({ values, handleChange }) => (
-                <Form className={style.contenedorModal}>
-                    <div className={style.contenedorBttnClose}>
+                <Form>
+                    <div  className={style.container_cleseModal_subcategory}>
                         <button
                         type="button"
-                        className={style.bttnClose}
+                        className={style.cleseModal_subcategory}
                         onClick={() => closeModal(false)}
                         >
                             X
                         </button>
                     </div>
-                    <div className={style.titulo}>
+                    <div className={style.title_subcategory}>
                         <span>Nueva Subcategoría</span>
                     </div>
-                    <div className={style.bodyM}>
-                    {/* Selección de categoría */}
-                        <div className={style.seccionM}>
+                    <div className={style.form_subcategory}>
+                        <div className={style.subcategory}>
                             <label htmlFor="categoryId">Categoría</label>
                             <Field
                             as="select"
@@ -87,13 +84,14 @@ const handleSubmit = (input, { resetForm }) => {
                                 className={style.errorMessage}
                             />
                         </div>
-                        <div className={style.seccionM}>
+                        <div className={style.subcategory}>
                             <label htmlFor="sub_category_name">Nombre de la subcategoría</label>
                             <Field
                                 type="text"
                                 id="sub_category_name"
                                 name="sub_category_name"
                                 placeholder="Nombre de la subcategoría"
+                                className={style.input_subcategory}
                             />
                             <ErrorMessage
                                 name="sub_category_name"
@@ -102,9 +100,9 @@ const handleSubmit = (input, { resetForm }) => {
                             />
                         </div>
                     </div>
-                    <div className={style.footer}>
-                        <button type="submit" className={style.bttn}>
-                        Añadir Subcategoría
+                    <div className={style.footer_subcategory}>
+                        <button type="submit" className={style.bttn_footer_subcategory}>
+                            Añadir Subcategoría
                         </button>
                     </div>
                 </Form>
